@@ -32,19 +32,19 @@ public class DGTConvConstants {
 	public static final String filesRootFolder = folder_on_working_machine + subDirectoryName +"/content/streams";
 	public static final String IEfullFileName = folder_on_working_machine + subDirectoryName + "/content/ie"; //1.xml";
 
-/*	
+	
 	public static final String PDS_URL = "https://pds.libis.be/pds";
 	public static final String DEPOSIT_WSDL_URL = "http://depot.lias.be/dpsws/deposit/DepositWebServices?wsdl";
 	public static final String PRODUCER_WSDL_URL = "http://depot.lias.be/dpsws/backoffice/ProducerWebServices?wsdl";
 	public static final String SIP_STATUS_WSDL_URL = "http://depot.lias.be/dpsws/repository/SipWebServices?wsdl";
-*/	
 	
+/*	
 	public static final String PDS_URL = "http://libis-p-rosetta-3.cc.kuleuven.be:8991/pds";
 	public static final String DEPOSIT_WSDL_URL = "http://libis-p-rosetta-3.cc.kuleuven.be:1801/dpsws/deposit/DepositWebServices?wsdl";
 	public static final String PRODUCER_WSDL_URL = "http://libis-p-rosetta-3.cc.kuleuven.be:1801/dpsws/backoffice/ProducerWebServices?wsdl";
 	public static final String SIP_STATUS_WSDL_URL = "http://libis-p-rosetta-3.cc.kuleuven.be:1801/dpsws/repository/SipWebServices?wsdl";
 	public static final String CONNECTION_WSDL_URL = "http://libis-p-rosetta-3.cc.kuleuven.be:1801/dpsws/repository/CollectionWebServices?wsdl";
-
+*/
 	public static final int	DGT_WEBDOC = 1; 	
 	public static final int DGT_EAD	 = 2;
 	public static final int	DGT_DIG_POSTERS = 3;

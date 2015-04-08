@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	targetNamespace="http://www.exlibrisgroup.com/xsd/dps/permanenemt/version"
+	xmlns="http://www.exlibrisgroup.com/xsd/dps/permanenemt/version"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="unqualified" >
+
+	<xs:element name="versions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="pid" type="xs:string"/>
+				<xs:element name="version" type="version" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="version">
+		<xs:sequence>
+			<xs:element name="title" type="xs:string" />
+			<xs:element name="version" type="xs:int" />
+			<xs:element name="storage_date" type="xs:dateTime" />
+			<xs:element name="creator" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

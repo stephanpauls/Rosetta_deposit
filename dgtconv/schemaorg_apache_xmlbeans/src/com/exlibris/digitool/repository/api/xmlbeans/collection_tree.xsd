@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://com/exlibris/digitool/common/collection/xmlbeans" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cl="http://com/exlibris/digitool/common/collection/xmlbeans" elementFormDefault="unqualified">
+	
+	<xs:element name="collections">
+		<xs:complexType> 
+			<xs:sequence>				
+				<xs:element name="collection" type="cl:collection" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence> 
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:complexType name="collection">
+			<xs:sequence>
+				<xs:element name="name" type="xs:string" maxOccurs="1"/>
+				<xs:element name="library" type="xs:string" maxOccurs="1"/>
+				<xs:element name="sort_order" type="xs:string" maxOccurs="1"/>
+				<xs:element name="owner" type="xs:string" maxOccurs="1"/>
+				<xs:element name="thumbnail" type="xs:string" maxOccurs="1"/>
+				<xs:element name="description_short" type="xs:string" maxOccurs="1"/>
+				<xs:element name="description_long" type="xs:string" maxOccurs="1"/>	
+				<xs:element name="list" type="cl:list" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="search_cmd" type="xs:string" maxOccurs="1"/>
+				<xs:element name="search_base" type="xs:string" maxOccurs="1"/>
+				<xs:element name="search_sort" type="xs:string" maxOccurs="1"/>	
+				<xs:element name="full_path" type="xs:string" maxOccurs="1"/>	
+				<xs:element name="pid" type="xs:string" maxOccurs="1"/>	
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:string"/>	
+	</xs:complexType>
+
+	<xs:complexType name="list">
+			<xs:sequence>
+				<xs:element name="item" type="cl:item" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="type" type="xs:string"/>	
+	</xs:complexType>
+	
+	<xs:complexType name="item">
+			<xs:sequence>
+				<xs:element name="id" type="xs:string" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="subject" type="xs:string" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="title" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute name="type" type="xs:string"/>	
+	</xs:complexType>
+
+</xs:schema>

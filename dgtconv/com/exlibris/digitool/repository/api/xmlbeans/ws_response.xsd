@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	targetNamespace="http://www.exlibrisgroup.com/xsd/dps/backoffice/service"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:bo="http://www.exlibrisgroup.com/xsd/dps/backoffice/service"
+	elementFormDefault="unqualified">
+
+		<xs:element name="response">
+			<xs:complexType>
+				<xs:complexContent>
+					<xs:extension base="bo:response" />
+				</xs:complexContent>
+			</xs:complexType>
+		</xs:element>
+
+		<xs:complexType name="response">
+			<xs:all>
+				<xs:element name ="id" type="xs:long" />
+				<xs:element name ="is_error" type="xs:boolean" />
+				<xs:element name ="error_description " type="xs:string" />
+
+			</xs:all>
+		</xs:complexType>
+
+
+
+</xs:schema>

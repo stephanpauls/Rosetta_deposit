@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.exlibrisgroup.com/xsd/digitool/file_descriptor" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.exlibrisgroup.com/xsd/digitool/file_descriptor" elementFormDefault="unqualified">
+
+	<xs:element name="fds">
+		<xs:complexType>
+	    	<xs:sequence>
+	      		<xs:element name="fd" type="fd"	minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="fd">
+		<xs:sequence>
+			<xs:element name="key" type="xs:string"/>	
+			<xs:element name="fileType" type="xs:string"/>
+			<xs:element name="order" type="xs:string"/>	
+			<xs:element name="file_name" type="xs:string"/>					
+			<xs:element name="label" type="xs:string"/>
+			<xs:element name="note" type="xs:string"/>
+			<xs:element name="entity_type" type="xs:string"/>
+			<xs:element name="usage_type" type="xs:string"/>
+			<xs:element name="partition_a" type="xs:string"/>
+			<xs:element name="partition_b" type="xs:string"/>
+			<xs:element name="partition_c" type="xs:string"/>
+			<xs:element name="status" type="xs:string"/>
+			<xs:element name="preservation_level" type="xs:string"/>
+		</xs:sequence>	
+	</xs:complexType>
+	
+	
+</xs:schema>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:si="http://com/exlibris/digitool/common/formatting/xmlbeans" targetNamespace="http://com/exlibris/digitool/common/formatting/xmlbeans" elementFormDefault="unqualified">
+	<xs:element name="xmetadiss_mapping">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="fields" type="si:map_fields" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="normalizing_profiles" type="si:map_normalizing_profiles" minOccurs="1" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="map_fields">
+		<xs:sequence>
+			<xs:element name="field" type="si:map_field" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="map_field">
+		<xs:sequence>
+			<xs:element name="location" type="si:map_location" maxOccurs="unbounded"/>
+			<xs:element name="attribute" type="si:map_attribute" maxOccurs="unbounded"/>
+			<xs:element name="field_path" type="xs:string" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="tag_name" type="xs:string"/>
+		<xs:attribute name="node_name" type="xs:string"/>
+		<xs:attribute name="group_name" type="xs:string"/>
+		<xs:attribute name="xsi_type" type="xs:string"/>
+		<xs:attribute name="normalizing_profiles_ref" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="map_attribute">
+		<xs:attribute name="name" type="xs:string"/>
+		<xs:attribute name="value" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="map_location">
+		<xs:attribute name="type" type="xs:string"/>
+		<xs:attribute name="md_name" type="xs:string"/>
+		<xs:attribute name="md_type" type="xs:string"/>
+		<xs:attribute name="path" type="xs:string"/>
+		<xs:attribute name="normalizing_profiles_ref" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:complexType name="map_normalizing_profiles">
+		<xs:sequence>
+			<xs:element name="normalizing_profile" type="si:map_normalizing_profile" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="map_normalizing_profile">
+		<xs:sequence>
+			<xs:element name="normalizer" type="si:map_normalizer" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="map_normalizer">
+		<xs:attribute name="class_name" type="xs:string"/>
+	</xs:complexType>
+</xs:schema>

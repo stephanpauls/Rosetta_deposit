@@ -1,0 +1,89 @@
+<pl:metadata-config xmlns:pl="http://www.exlibrisgroup.com/Plugins/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+  <pl:pluginTypeName>NotificationAdapterPlugin</pl:pluginTypeName>
+  <pl:deployName>EMAILAdapter</pl:deployName>
+  <pl:className>com.exlibris.core.infra.svc.api.notificationAdapters.EMAILAdapter</pl:className>
+  <pl:description>Email Notification Adapter Plugin</pl:description>
+  <pl:version>1</pl:version>
+  <pl:initParameters>
+   <fr:x_form xmlns:fr="http://com/exlibris/digitool/common/forms/xmlbeans">
+      <grid_x>2</grid_x>
+      <x_fields>
+        <x_field>
+          <field_name>Parm X </field_name>
+          <label>
+            recordType
+          </label>
+          <single>false</single>
+          <mandatory>false</mandatory>
+          <x_logic_type>String</x_logic_type>
+          <x_ui_type>TextField</x_ui_type>
+          <x_options></x_options>
+        </x_field>
+        <x_field>
+          <field_name>Parm Y</field_name>
+          <label>
+           role
+          </label>
+          <single>false</single>
+          <mandatory>false</mandatory>
+          <x_logic_type>String</x_logic_type>
+          <x_ui_type>TextField</x_ui_type>
+          <x_options></x_options>
+        </x_field>
+        <x_field>
+          <field_name>Parm C</field_name>
+          <label>
+           createdOn
+          </label>
+          <single>false</single>
+          <mandatory>false</mandatory>
+          <x_logic_type>Date</x_logic_type>
+          <x_ui_type>TextField</x_ui_type>
+          <x_options></x_options>
+        </x_field>
+        <x_field>
+          <field_name>Parm D</field_name>
+          <label>
+            createdBy
+          </label>
+          <single>false</single>
+          <mandatory>false</mandatory>
+          <x_logic_type>String</x_logic_type>
+          <x_ui_type>TextField</x_ui_type>
+          <x_options></x_options>
+        </x_field>
+        <x_field>
+          <field_name>Parm H</field_name>
+          <label>
+            updatedBy
+          </label>
+          <single>false</single>
+          <mandatory>false</mandatory>
+          <x_logic_type>String</x_logic_type>
+          <x_ui_type>TextField</x_ui_type>
+          <x_options></x_options>
+        </x_field>
+      </x_fields>
+    </fr:x_form>
+   </pl:initParameters>
+
+  <pl:materialType>ALL</pl:materialType>
+  <pl:generalType>ADAPTOR</pl:generalType>
+  <pl:publicApi>Y</pl:publicApi>
+  <pl:implType>java</pl:implType>
+  <pl:contactPerson  >
+    <contact_info xmlns="http://www.exlibrisgroup.com/Plugins/1.0/">
+      <contactType>admin</contactType>
+      <firstName>Exlibris</firstName>
+      <lastName>Exlibris</lastName>
+      <telephone1></telephone1>
+      <telephone2></telephone2>
+      <email></email>
+      <address1></address1>
+      <address2></address2>
+      <city></city>
+      <zipCode></zipCode>
+      <country></country>
+    </contact_info>
+  </pl:contactPerson>
+</pl:metadata-config>

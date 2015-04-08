@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.exlibrisgroup.com/xsd/dps/sip/message"
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns="http://www.exlibrisgroup.com/xsd/dps/sip/message"
+		   elementFormDefault="unqualified">
+
+	<xs:element name="sip_message">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sip_id"		type="xs:long"			minOccurs="1" maxOccurs="1"/>
+				<xs:element name="sip_status"	type="sip_status"		minOccurs="1" maxOccurs="1"/>
+				<xs:element name="units"		type="units"			minOccurs="1" maxOccurs="1"/>
+				<xs:element name="is_error"		type="xs:boolean"		minOccurs="1" maxOccurs="1"/>
+				<xs:element name="error_code"	type="xs:string"		minOccurs="0" maxOccurs="1"/>
+				<xs:element name="reason"		type="xs:string"		minOccurs="0" maxOccurs="1"/>
+				<xs:element name="owner" 		type="xs:string"		minOccurs="0" maxOccurs="1"/>
+				<xs:element name="email_address_cc" type="xs:string"		minOccurs="0" maxOccurs="1"/>
+				<xs:element name="email_message" 	type="xs:string"		minOccurs="0" maxOccurs="1"/>
+				<xs:element name="relevant_files" 	type="relevant_files" 	minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="sip_status">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="rejected"/>
+			<xs:enumeration value="declined"/>
+			<xs:enumeration value="ignored"/>
+			<xs:enumeration value="approved"/>
+			<xs:enumeration value="submitted"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="units">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="sip"/>
+			<xs:enumeration value="ie"/>
+			<xs:enumeration value="file"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="relevant_files">
+    	<xs:sequence>
+      		<xs:element name="relevant_file"	type="relevant_file"	minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="relevant_file">
+			<xs:sequence>
+				<xs:element name="pid"					type="xs:string"	minOccurs="0" maxOccurs="1"/>
+				<xs:element name="original_file_name"	type="xs:string"	minOccurs="1" maxOccurs="1"/>
+				<xs:element name="normalized_file_name"	type="xs:string"	minOccurs="0" maxOccurs="1"/>
+				<xs:element name="label"				type="xs:string"	minOccurs="0" maxOccurs="1"/>
+				<xs:element name="note"					type="xs:string"	minOccurs="0" maxOccurs="1"/>
+				<xs:element name="reason"				type="xs:string"	minOccurs="0" maxOccurs="1"/>
+				<xs:element name="status"				type="file_status"	minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="file_status">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="rejected"/>
+			<xs:enumeration value="declined"/>
+			<xs:enumeration value="ignored"/>
+			<xs:enumeration value="approved"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

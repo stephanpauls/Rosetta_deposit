@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.exlibrisgroup.com/xsd/digitool/repository/replication" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.exlibrisgroup.com/xsd/digitool/repository/replication" xmlns:rs="http://www.exlibrisgroup.com/xsd/digitool/repository/sets" elementFormDefault="unqualified">
+<xs:import namespace="http://www.exlibrisgroup.com/xsd/digitool/repository/sets" schemaLocation="repository_sets.xsd"/>
+
+	<xs:element name="replications">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="replication"	type="replication"	minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:complexType name="replication">
+    	<xs:sequence>
+			<xs:element name="last_update"		type="xs:string"		minOccurs="1" maxOccurs="1"/>
+			<xs:element ref="rs:set"/>
+			<xs:element name="targets"			type="targets"			minOccurs="1" maxOccurs="1" />
+			<xs:element name="scheduling"		type="scheduling"		minOccurs="1" maxOccurs="1" />
+      		<!-- <xs:element name="transformation" type="transformation" minOccurs="1" maxOccurs="1" /> -->
+		</xs:sequence>
+		<xs:attribute name="name"	type="xs:string"/>
+		<xs:attribute name="enable"	type="xs:boolean" default="true"/>
+	</xs:complexType>
+	
+	<xs:complexType name="targets" mixed="true">
+		<xs:sequence>
+			<xs:element name="target"	type="target"	minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="target">
+    	<xs:sequence>
+   			<xs:element name="directory"		type="directory"			minOccurs="1" maxOccurs="1"/>
+			<xs:element name="format_convertor"	type="format_convertor"	minOccurs="1" maxOccurs="1"/>
+			<xs:element name="host"				type="xs:string"			minOccurs="0" maxOccurs="1" />
+			<xs:element name="user"				type="xs:string"			minOccurs="0" maxOccurs="1" />
+			<xs:element name="password"			type="xs:string"			minOccurs="0" maxOccurs="1" />
+			<xs:element name="params"			type="params"			minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+		<xs:attribute name="type"	type="target_type"/>
+		<xs:attribute name="class_name"	type="xs:string"/>
+	</xs:complexType>
+	
+	<xs:simpleType name="target_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="nfs"/>
+			<xs:enumeration value="ftp"/>
+			<xs:enumeration value="class"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="directory" mixed="true">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="sub_dir_num" 	type="xs:nonNegativeInteger"/>
+			</xs:extension>
+		</xs:simpleContent>			
+	</xs:complexType>
+	
+	<xs:complexType name="format_convertor" mixed="true">
+		<xs:sequence>
+   			<xs:element name="params"	type="params"	minOccurs="0" maxOccurs="1"/>
+   		</xs:sequence>
+		<xs:attribute name="type" 		type="format_convertor_type"/>
+		<xs:attribute name="convertor" 	type="xs:string"/>				
+	</xs:complexType>
+	
+	<xs:complexType name="params" mixed="true">
+		<xs:sequence>
+			<xs:element name="param"	type="param"	minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="param" mixed="true">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="name" 	type="xs:string"/>				
+			</xs:extension>
+		</xs:simpleContent>			
+	</xs:complexType>
+	
+	<xs:simpleType name="format_convertor_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="xsl"/>
+			<xs:enumeration value="class"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="scheduling" mixed="true">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="sync_on_startup" 	type="xs:boolean"/>
+				<xs:attribute name="type"				type="scheduling_type"/>
+				<xs:attribute name="x"					type="xs:string"/>
+				<xs:attribute name="y" 					type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>			
+	</xs:complexType>
+	
+	<xs:simpleType name="scheduling_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="every_x_minutes"/>
+			<xs:enumeration value="every_x_hours"/>
+			<xs:enumeration value="every_day_at_x_and_y"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- <xs:complexType name="transformation" mixed="true">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="input_type" 	type="xs:string"/>
+				<xs:attribute name="type"			type="rr:transformation_type"/>
+				<xs:attribute name="transformer"	type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>			
+	</xs:complexType> -->
+	
+	<!-- <xs:simpleType name="transformation_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="xsl"/>
+			<xs:enumeration value="class"/>
+		</xs:restriction>
+	</xs:simpleType> -->
+	
+</xs:schema>

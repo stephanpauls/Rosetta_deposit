@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.exlibrisgroup.com/Plugins/1.0/" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pm="http://www.exlibrisgroup.com/Plugins/1.0/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<element name="contact_info">
+		<complexType>
+			<sequence>
+				<element name="contactType" type="pm:contactType"/>
+				<element name="firstName" type="string" minOccurs="0"/>
+				<element name="lastName" type="string"/>
+				<element name="telephone1" type="string" minOccurs="0"/>
+				<element name="telephone2" type="string" minOccurs="0"/>
+				<element name="email" type="string"/>
+				<element name="address1" type="string" minOccurs="0"/>
+				<element name="address2" type="string" minOccurs="0"/>
+				<element name="city" type="string" minOccurs="0"/>
+				<element name="zipCode" type="string" minOccurs="0"/>
+				<element name="country" type="string" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<simpleType name="contactType">
+		<restriction base="string">
+			<enumeration value="admin"/>
+			<enumeration value="support"/>
+			<enumeration value="developer"/>
+			<enumeration value="user"/>
+		</restriction>
+	</simpleType>
+</schema>

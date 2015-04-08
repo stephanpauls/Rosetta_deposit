@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 sp1 U (http://www.xmlspy.com) by danas (exlibri) -->
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Guy (Exlibris) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ar="http://com/exlibris/digitool/repository/api/xmlbeans" targetNamespace="http://com/exlibris/digitool/repository/api/xmlbeans" elementFormDefault="unqualified">
+	<xs:element name="access_right_md">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ar_description" type="xs:string"/>
+				<xs:element name="ar_copyrights" type="ar:ar_copyrights"/>
+				<xs:element name="ar_conditions" type="ar:ar_conditions"/>
+				<xs:element name="ar_mid" type="xs:string"/>
+			</xs:sequence>
+			<xs:attribute name="enabled" type="xs:boolean" default="true"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ar_copyrights">
+		<xs:annotation>
+			<xs:documentation>Access Rights copyrights: the name of the file which contains the copyrights declaration.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="text_file" type="xs:string"/>
+		</xs:sequence>
+		<xs:attribute name="required" type="xs:boolean" default="false"/>
+	</xs:complexType>
+	<xs:complexType name="ar_conditions">
+		<xs:annotation>
+			<xs:documentation>Conditions: a set of access rights conditions. In case of several conditions, the operator "OR" is used between the conditions. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ar_condition" type="ar:ar_condition" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ar_condition">
+		<xs:annotation>
+			<xs:documentation>Access Rights condition: each condition can contain one or more expressions. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ar_expressions" type="ar:ar_expressions"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ar_expressions">
+		<xs:annotation>
+			<xs:documentation>Access Rights expressions: this element enables building the condition as a set of expressions. Each expression is composed of two elements: key and value/s. The key element specifies the type of permission, i.e., group, IP range, not guest, course enrollment, everyone etc. The expression has attribute "ar_operation". It is used to indicate the relation between the Key and the Value elements, i.e., "eqals" or "within".</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ar_expression" type="ar:ar_expression" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ar_expression">
+		<xs:sequence>
+			<xs:element name="key" type="ar:ar_key"/>
+			<xs:element name="val1" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Value: Holds the value/s for the key parameter.
+					see ar_key documentation for specific key's possible values.
+					comment: use "DNX:" prefix followed by DNX path syntax {DNX_Section}.{DNX_Key} for run-time calculation of a parameter from the requested IE's DNX.
+					e.g. DNX:objectCharacteristics.creationDate
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="val2" type="xs:string">
+			<xs:annotation>
+					<xs:documentation>Value: Holds the value/s for the key parameter.
+					see ar_key documentation for specific key's possible values.
+					comment: use "DNX:" prefix followed by DNX path syntax {DNX_Section}.{DNX_Key} for run-time calculation of a parameter from the requested IE's DNX.
+					e.g. DNX:objectCharacteristics.creationDate
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="failure_message" type="xs:string">
+			<xs:annotation>
+					<xs:documentation>Optional message to the users describing why they did not have the access rights
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ar_operation" type="ar:ar_operation" default="eq"/>
+	</xs:complexType>
+	<xs:simpleType name="ar_operation">
+		<xs:annotation>
+			<xs:documentation>
+			eq - equals ignoring case.
+			within - checks if the key equals to one of the values seperated by a comma.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="eq"/>
+			<xs:enumeration value="within"/>
+			<xs:enumeration value="not equal"/>
+			<xs:enumeration value="before"/>
+			<xs:enumeration value="after"/>
+			<xs:enumeration value="contains"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ar_key">
+			<xs:annotation>
+					<xs:documentation>
+			key: ip_range - checks if the requester's (remote) ip is in the specified range between val1 and val2
+			e.g.
+				<ar_expression>
+					<key>ip_range</key>
+					<val1>178.90.1.0</val1>
+					<val2>178.90.1.255</val2>
+				</ar_expression>
+			ar_operation support: within|contains
+			<!--
+			key: ip - compares the requester's (remote) ip to the value specified in val1
+			ar_operation support: eq|within
+			e.g.
+				<ar_expression ar_operation="within">
+					<key>ip</key>
+					<val1>178.90.1.0, 178.90.1.4, 178.90.1.9</val1>
+				</ar_expression>
+			-->
+
+			key: everyone - no checks at all.
+
+			key: date_compare - checks if the current date if before/after (ar_operation) the date specified in val1 adding the number of years specified in val2.
+			ar_operation support: after|before|eq
+			date format: yyyy-MM-dd HH:mm:ss
+			e.g. -
+			1) if current date is after 23/01/2017
+				<ar_expression ar_operation="after">
+					<key>date_compare</key>
+					<val1>2017-01-23</val1>
+					<val2>0</val2>
+				</ar_expression>
+
+			2) if current date is 5 years after the date specified in the requested IE's DNX in section:objectCharacteristics, key:creationDate
+				<ar_expression ar_operation="after">
+					<key>date_compare</key>
+					<val1>DNX:objectCharacteristics.creationDate</val1>
+					<val2>5</val2>
+				</ar_expression>
+
+			key: expiry_date - checks if current date is before the date specified in val1. this key is for backwards compatability, use date_compare.
+			date format: see date_compare.
+
+			key: not_guest - checks if the user is a registered user.
+
+			key: concurrent_users - checks if the maximum concurrent user number is reached
+			ar_operation support: eq|within
+
+			key: custom - custom checking class that implements the AccessChecker Interface
+				val1 - hold the full class name
+				val2 - hold parameters that passed to the checker
+
+			key: group - compares the group from the user's PDS information to the value specified in val1
+			ar_operation support: eq|within
+
+			key: user_id - compares the ID from the user's PDS information to the value specified in val1
+			ar_operation support: eq|within
+
+			key: bor_group_m - compares the bor_group_m from the user's PDS information to the value specified in val1
+			ar_operation support: eq|within
+
+			key: bor_dept_m - compares the bor_dept_m from the user's PDS information to the value specified in val1
+			ar_operation support: eq|within
+
+			key: bor_tuples_m - compares the bor_tuples_m from the user's PDS information to the value specified in val1
+			ar_operation support: eq|within
+
+			key: course_enrollment_m - compares the course_enrollment_m from the user's PDS information to the value specified in val1
+			ar_operation support: eq|within
+
+			key: access_rights_plugin - plug-in checking class that implements the ARPlugin Interface
+				ar_operation support: eq
+				val1 - the instance name of the plugin to check
+
+				</xs:documentation>
+			</xs:annotation>
+
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ip_range"/>
+			<xs:enumeration value="everyone"/>
+			<xs:enumeration value="date_compare"/>
+			<xs:enumeration value="not_guest"/>
+			<xs:enumeration value="expiry_date"/>
+			<xs:enumeration value="concurrent_users"/>
+			<xs:enumeration value="group"/>
+			<xs:enumeration value="user_id"/>
+			<xs:enumeration value="bor_group_m"/>
+			<xs:enumeration value="bor_dept_m"/>
+			<xs:enumeration value="bor_tuples_m"/>
+			<xs:enumeration value="course_enrollment_m"/>
+			<xs:enumeration value="access_rights_plugin"/>
+			<xs:enumeration value="custom"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

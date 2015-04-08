@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://com/exlibris/digitool/sds/xmlbeans" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" 
+	xmlns:sds="http://com/exlibris/digitool/sds/xmlbeans">
+	<xs:element name="digital-bin">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="sds:public-name"/>
+				<xs:element ref="sds:public-desc"/>
+				<xs:element ref="sds:no-elements"/>
+				<xs:element ref="sds:elements"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="element">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="sds:z129"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="elements">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="sds:element" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="no-elements" type="xs:byte"/>
+	<xs:element name="public-desc" type="xs:string"/>
+	<xs:element name="public-name" type="xs:string"/>
+	<xs:element name="z129">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="sds:z129-id"/>
+				<xs:element ref="sds:z129-sequence"/>
+				<xs:element ref="sds:z129-type"/>
+				<xs:element ref="sds:z129-selected"/>
+				<xs:element ref="sds:z129-base"/>
+				<xs:element ref="sds:z129-doc-number"/>
+				<xs:element ref="sds:z129-open-date"/>
+				<xs:element ref="sds:z129-folder"/>
+				<xs:element ref="sds:z129-note"/>
+				<xs:element ref="sds:z129-object-id"/>
+				<xs:element ref="sds:z129-public"/>
+				<xs:element ref="sds:z129-public-name"/>
+				<xs:element ref="sds:z129-public-desc"/>
+				<xs:element ref="sds:z129-sort-field"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="z129-base" type="xs:string"/>
+	<xs:element name="z129-doc-number" type="xs:byte"/>
+	<xs:element name="z129-folder" type="xs:string"/>
+	<xs:element name="z129-id" type="xs:string"/>
+	<xs:element name="z129-note" type="xs:string"/>
+	<xs:element name="z129-object-id" type="xs:string"/>
+	<xs:element name="z129-open-date" type="xs:byte"/>
+	<xs:element name="z129-public" type="xs:string"/>
+	<xs:element name="z129-public-desc" type="xs:string"/>
+	<xs:element name="z129-public-name" type="xs:string"/>
+	<xs:element name="z129-selected" type="xs:string"/>
+	<xs:element name="z129-sequence" type="xs:string"/>
+	<xs:element name="z129-sort-field" type="xs:string"/>
+	<xs:element name="z129-type" type="xs:string"/>
+</xs:schema>

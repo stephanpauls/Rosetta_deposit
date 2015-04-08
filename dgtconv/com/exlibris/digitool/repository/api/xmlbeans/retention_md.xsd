@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 sp1 U (http://www.xmlspy.com) by danas (exlibri) -->
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Guy (Exlibris) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:retention="http://com/exlibris/digitool/repository/api/xmlbeans" targetNamespace="http://com/exlibris/digitool/repository/api/xmlbeans" elementFormDefault="unqualified">
+	<xs:element name="retention_md">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="retention_description" type="xs:string"/>
+				<xs:element name="retention_expression" type="retention:retention_expression"/>
+				<xs:element name="retention_mid" type="xs:string"/>
+				<xs:element name="permanently" type="xs:boolean" default="false"/>
+			</xs:sequence>
+
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="retention_expression">
+		<xs:sequence>
+			<xs:element name="key" type="retention:retention_key"/>
+			<xs:element name="value1" type="retention:retention_value">
+				<xs:annotation>
+					<xs:documentation>Value: Holds the value/s for the key parameter.
+					see ar_key documentation for specific key's possible values.
+					comment: use "DNX:" prefix followed by DNX path syntax {DNX_Section}.{DNX_Key} for run-time calculation of a parameter from the requested IE's DNX.
+					e.g. DNX:objectCharacteristics.creationDate
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="value2" type="retention:retention_value">
+			<xs:annotation>
+					<xs:documentation>Value: Holds the value/s for the key parameter.
+					see ar_key documentation for specific key's possible values.
+					comment: use "DNX:" prefix followed by DNX path syntax {DNX_Section}.{DNX_Key} for run-time calculation of a parameter from the requested IE's DNX.
+					e.g. DNX:objectCharacteristics.creationDate
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="failure_message" type="xs:string">
+			<xs:annotation>
+					<xs:documentation>Optional message to the users describing why they did not have the access rights
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="retention_referenced_date" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="retention_key">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="none"/>
+			<xs:enumeration value="time_elapsed"/>
+			<xs:enumeration value="after_particular_date"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="retention_value">
+		<xs:sequence>
+			<xs:element name="value" type="xs:string"/>
+			<xs:element name="value_type" type="retention:retention_value_type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="retention_value_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="string"/>
+			<xs:enumeration value="date"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

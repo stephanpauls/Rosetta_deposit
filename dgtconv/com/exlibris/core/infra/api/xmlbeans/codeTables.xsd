@@ -1,0 +1,281 @@
+<xs:schema
+  targetNamespace="http://com/exlibris/digitool/common/codetables/xmlbeans"
+  xmlns="http://com/exlibris/digitool/common/codetables/xmlbeans"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+  <xs:element name="tables">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="codeTables" type="codeTables"
+          minOccurs="0" maxOccurs="1" />
+        <xs:element name="mappingTables" type="mappingTables"
+          minOccurs="0" maxOccurs="1" />
+      </xs:sequence>
+      <xs:attribute name="defaultLanguage" type="xs:string"
+        default="en_US" />
+      <xs:attribute name="defaultOrganizationalLevel" default="CRS" >
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="CRS" />
+            <xs:enumeration value="INS" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="tableInfo">
+    <xs:attribute name="subSystem" type="xs:string" use="required" />
+    <xs:attribute name="tableLevel" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="A" />
+          <xs:enumeration value="I" />
+          <xs:enumeration value="G" />
+          <xs:enumeration value="ALL" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="spPolicy" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="OVERRIDDEN" />
+          <xs:enumeration value="NOT_OVERRIDDEN" />
+          <xs:enumeration value="MERGED" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="customerBehavior" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="FIXED_ROWS" />
+          <xs:enumeration value="HIDE" />
+          <xs:enumeration value="ALL" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="description" type="xs:string" />
+    <xs:attribute name="enabled" type="xs:boolean" default="true" />
+    <xs:attribute name="deInheritType" default="TABLE">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="TABLE" />
+          <xs:enumeration value="ROW" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="lowestDeinheritLevel" default="R">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="OTB" />
+          <xs:enumeration value="R" />
+          <xs:enumeration value="Consortia" />
+          <xs:enumeration value="Institution" />
+          <xs:enumeration value="Library" />
+          <xs:enumeration value="Unit" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="otbPolicy" default="INHERIT_ALL">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="INHERIT_ALL" />
+          <xs:enumeration value="INHERIT_INSERTS" />
+          <xs:enumeration value="INHERIT_NOTHING" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+
+
+  <xs:complexType name="codeTables">
+    <xs:sequence>
+      <xs:element name="defaultCodeValues"
+        type="defaultCodeValues" minOccurs="0" maxOccurs="1" />
+      <xs:element name="codeTable" type="codeTable" minOccurs="1"
+        maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="defaultCodeValues">
+    <xs:attribute name="icon" type="xs:string" />
+    <xs:attribute name="color" type="xs:string" />
+    <xs:attribute name="enabled" type="xs:boolean" />
+  </xs:complexType>
+
+
+  <xs:complexType name="codeTable">
+    <xs:sequence>
+      <xs:element name="table" type="tableInfo" minOccurs="1"
+        maxOccurs="1" />
+      <xs:element name="columns" type="columns"
+        minOccurs="1" maxOccurs="1" />
+      <xs:element name="codeValues" type="codeValues"
+        minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="tableName" type="xs:string" />
+    <xs:attribute name="displayTableName" type="xs:string" />
+    <xs:attribute name="application" type="xs:string" use="optional"/>
+    <xs:attribute name="owner" type="xs:string" use="optional"/>
+    <xs:attribute name="organizationalLevel" use="optional">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="CRS" />
+          <xs:enumeration value="INS" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="creator" type="xs:string" use="optional"/>
+    <xs:attribute name="modifiedBy" type="xs:string" use="optional"/>
+    <xs:attribute name="createDate" type="xs:date" use="optional"/>
+    <xs:attribute name="modificationDate" type="xs:date" use="optional"/>
+
+  </xs:complexType>
+
+  <xs:complexType name="columns">
+    <xs:sequence>
+      <xs:element name="targetColumn" type="column"
+        minOccurs="1" maxOccurs="1" />
+      <xs:element name="source1Column" type="column"
+        minOccurs="1" maxOccurs="1" />
+      <xs:element name="source2Column" type="column"
+        minOccurs="0" maxOccurs="1" />
+      <xs:element name="source3Column" type="column"
+        minOccurs="0" maxOccurs="1" />
+      <xs:element name="source4Column" type="column"
+        minOccurs="0" maxOccurs="1" />
+      <xs:element name="source5Column" type="column"
+        minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="column">
+    <xs:attribute name="name" type="xs:string" use="required" />
+    <xs:attribute name="number" type="xs:int"/>
+    <xs:attribute name="description" type="xs:string"/>
+    <xs:attribute name="keyComposite" type="xs:string"/>
+    <xs:attribute name="units" type="xs:string"/>
+    <xs:attribute name="readOnly" type="xs:boolean"/>
+    <xs:attribute name="style" type="xs:string"/>
+    <xs:attribute name="application" type="xs:string" use="optional"/>
+    <xs:attribute name="owner" type="xs:string" use="optional"/>
+    <xs:attribute name="creator" type="xs:string" use="optional"/>
+    <xs:attribute name="modifiedBy" type="xs:string" use="optional"/>
+    <xs:attribute name="createDate" type="xs:date" use="optional"/>
+    <xs:attribute name="modificationDate" type="xs:date" use="optional"/>
+    <xs:attribute name="sourceCodeTableId" type="xs:int" use="optional"/>
+    <xs:attribute name="dataType" type="xs:string" use="optional"/>
+    <xs:attribute name="dataTypeModifier" type="xs:string" use="optional"/>
+    <xs:attribute name="validators" type="xs:string" />
+    <xs:attribute name="optionList" type="xs:string" />
+  </xs:complexType>
+
+  <xs:complexType name="codeValues">
+    <xs:sequence>
+      <xs:element name="codeValue" type="codeValueRow"
+        minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="codeValueRow">
+    <xs:sequence>
+      <xs:element name="otherLanguagesValues"
+        type="otherLanguagesValues" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="code" type="xs:string" use="required" />
+    <xs:attribute name="codeValue" type="xs:string" use="required" />
+    <xs:attribute name="color" type="xs:string" />
+    <xs:attribute name="displayOrder" type="xs:int" />
+    <xs:attribute name="defaultValue" type="xs:boolean"
+      default="false" />
+    <xs:attribute name="icon" type="xs:string" />
+    <xs:attribute name="enabled" type="xs:boolean" default="true" />
+    <xs:attribute name="lang" type="xs:string" use="optional"/>
+    <xs:attribute name="application" type="xs:string" use="optional"/>
+    <xs:attribute name="owner" type="xs:string" use="optional"/>
+    <xs:attribute name="creator" type="xs:string" use="optional"/>
+    <xs:attribute name="modifiedBy" type="xs:string" use="optional"/>
+    <xs:attribute name="createDate" type="xs:date" use="optional"/>
+    <xs:attribute name="modificationDate" type="xs:date" use="optional"/>
+    <xs:attribute name="deletePermitted" type="xs:boolean" default="true"/>
+    <xs:attribute name="note" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="otherLanguagesValues">
+    <xs:sequence>
+      <xs:element name="languageValue" type="languageValue"
+        minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="languageValue">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="localeValue" type="xs:string"
+          default="en_US" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="mappingTables">
+    <xs:sequence>
+      <xs:element name="mappingTable" type="mappingTable"
+        minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="mappingTable">
+    <xs:sequence>
+      <xs:element name="table" type="tableInfo" minOccurs="1"
+        maxOccurs="1" />
+      <xs:element name="columns" type="columns"
+        minOccurs="1" maxOccurs="1" />
+      <xs:element name="mappings" type="mappings" minOccurs="1"
+        maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="tableName" type="xs:string" />
+    <xs:attribute name="displayTableName" type="xs:string" />
+    <xs:attribute name="application" type="xs:string" use="optional"/>
+    <xs:attribute name="owner" type="xs:string" use="optional"/>
+    <xs:attribute name="organizationalLevel" use="optional">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="CRS" />
+          <xs:enumeration value="INS" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="creator" type="xs:string" use="optional"/>
+    <xs:attribute name="modifiedBy" type="xs:string" use="optional"/>
+    <xs:attribute name="createDate" type="xs:date" use="optional"/>
+    <xs:attribute name="modificationDate" type="xs:date" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="mappings">
+    <xs:sequence>
+      <xs:element name="mapping" type="mappingRow" minOccurs="1"
+        maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="mappingRow">
+    <xs:attribute name="targetCode" type="xs:string" use="required" />
+    <xs:attribute name="source1" type="xs:string" use="required" />
+    <xs:attribute name="source2" type="xs:string" />
+    <xs:attribute name="source3" type="xs:string" />
+    <xs:attribute name="source4" type="xs:string" />
+    <xs:attribute name="source5" type="xs:string" />
+    <xs:attribute name="description" type="xs:string" />
+    <xs:attribute name="enabled" type="xs:boolean" default="true" />
+    <xs:attribute name="application" type="xs:string" use="optional"/>
+    <xs:attribute name="owner" type="xs:string" use="optional"/>
+    <xs:attribute name="creator" type="xs:string" use="optional"/>
+    <xs:attribute name="modifiedBy" type="xs:string" use="optional"/>
+    <xs:attribute name="createDate" type="xs:date" use="optional"/>
+    <xs:attribute name="modificationDate" type="xs:date" use="optional"/>
+    <xs:attribute name="deletePermitted" type="xs:boolean" default="true"/>
+ </xs:complexType>
+</xs:schema>
+
+

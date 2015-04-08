@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema targetNamespace="http://com/exlibris/digitool/repository/service/xmlbeans" xmlns:ds="http://com/exlibris/digitool/repository/service/xmlbeans" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
+	
+	
+		<xs:element name="de_service_result">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element name="is_error" type="xs:boolean"/>
+					<xs:element name="message_code" type="xs:string"/>		
+					<xs:element name="message_description" type="xs:string"/>			
+					<xs:element name="de_service" type="ds:de_service"/>	
+					<xs:element name="de_service_list" type="ds:de_service_list"/>						
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+	
+	
+		<xs:complexType name="de_service_list">
+			<xs:sequence>				
+				<xs:element name="de_service" type="ds:de_service" minOccurs="0" maxOccurs="unbounded"/>				
+			</xs:sequence>
+		</xs:complexType>
+	
+	
+	
+		<xs:complexType name="de_service">
+			<xs:sequence>
+				<xs:element name="name" type="xs:string"/>
+				<xs:element name="description" type="xs:string"/>				
+			</xs:sequence>
+		</xs:complexType>
+	
+	
+
+
+</xs:schema>

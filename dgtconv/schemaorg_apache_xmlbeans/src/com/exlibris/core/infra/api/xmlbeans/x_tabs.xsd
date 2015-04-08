@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://com/exlibris/core/web/page/xmlbeans"
+	xmlns:page="http://com/exlibris/core/web/page/xmlbeans"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:list="http://com/exlibris/core/web/listgenerator/xmlbeans"
+	xmlns:form="http://com/exlibris/digitool/common/forms/xmlbeans"
+	elementFormDefault="unqualified">
+
+	<xs:import
+		namespace="http://com/exlibris/core/web/listgenerator/xmlbeans"
+		schemaLocation="http://wikilibris/wiki/images/a/a0/X_list.xsd" />
+
+	<xs:element name="x_tabs" type="list:x_tabs">
+		<xs:annotation>
+			<xs:documentation>Tabs Widget</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

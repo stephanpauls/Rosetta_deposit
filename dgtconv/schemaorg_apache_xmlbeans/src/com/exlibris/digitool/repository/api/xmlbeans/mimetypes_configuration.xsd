@@ -1,0 +1,28 @@
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Guy (Exlibris) -->
+<xs:schema targetNamespace="http://com/exlibris/digitool/common/mimetypes/xmlbeans" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mn="http://com/exlibris/digitool/common/mimetypes/xmlbeans" elementFormDefault="unqualified">
+	
+	<xs:element name="mn_configuration">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="media_types" type="mn:media_types" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+    <xs:complexType name="media_types">
+			<xs:sequence>
+				<xs:element name="media_type" type="mn:media_type" minOccurs="0" maxOccurs="unbounded"/>				
+			</xs:sequence>
+	</xs:complexType>
+
+    <xs:complexType name="media_type">
+			<xs:sequence>
+				<xs:element name="mimetype" type="xs:string"/>
+                <xs:element name="entity_type" type="xs:string"/>
+				<xs:element name="icon" type="xs:string"/>
+				<xs:element name="icon_dis" type="xs:string"/>
+				<xs:element name="code" type="xs:string"/>
+			</xs:sequence>
+	</xs:complexType>
+	
+</xs:schema>

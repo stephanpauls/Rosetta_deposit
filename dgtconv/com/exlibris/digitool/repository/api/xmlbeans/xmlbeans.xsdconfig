@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xb:config xmlns:xb="http://xml.apache.org/xmlbeans/2004/02/xbean/config">
+
+  <xb:namespace uri="http://www.exlibrisgroup.com/xsd/digitool/repository/sets">
+  	<xb:package>com.exlibris.digitool.repository.sets.xmlbeans</xb:package>
+  </xb:namespace>
+
+  <xb:namespace uri="http://www.exlibrisgroup.com/xsd/digitool/repository/replication">
+  	<xb:package>com.exlibris.digitool.repository.replication.xmlbeans</xb:package>
+  </xb:namespace>
+
+  <xb:namespace uri="http://www.exlibrisgroup.com/xsd/digitool/repository/synchronisation">
+  	<xb:package>com.exlibris.digitool.repository.synchronisation.xmlbeans</xb:package>
+  </xb:namespace>
+
+  <xb:namespace uri="http://www.exlibrisgroup.com/xsd/digitool/file_descriptor">
+  	<xb:package>com.exlibris.digitool.file_descriptor.xmlbeans</xb:package>
+  </xb:namespace>
+
+  <xb:namespace uri="http://www.exlibrisgroup.com/xsd/digitool/profile">
+  	<xb:package>com.exlibris.digitool.pi.profile.xmlbeans</xb:package>
+  </xb:namespace>
+
+  <xb:namespace uri="http://www.exlibrisgroup.com/xsd/digitool/rule">
+  	<xb:package>com.exlibris.digitool.common.rule.xmlbeans</xb:package>
+  </xb:namespace>
+
+<xb:namespace uri="http://www.exlibrisgroup.com/xsd/digitool/repository/converting_rules">
+  	<xb:package>com.exlibris.digitool.repository.api.xmlbeans.manifests</xb:package>
+  </xb:namespace>
+
+<xb:namespace uri="http://www.exlibrisgroup.com/xsd/digitool/repository/file_edit_conf">
+  	<xb:package>com.exlibris.digitool.repository.fileconf.xmlbeans</xb:package>
+  </xb:namespace>
+
+<xb:namespace uri="http://www.exlibrisgroup.com/xsd/digitool/categories">
+  	<xb:package>com.exlibris.dps.common.xmlbeans.category</xb:package>
+  </xb:namespace>
+
+  <xb:namespace uri="http://www.exlibrisgroup.com/xsd/dps/deposit/service">
+  	<xb:package>com.exlibris.digitool.deposit.service.xmlbeans</xb:package>
+  </xb:namespace>
+
+  <xb:namespace uri="http://www.exlibrisgroup.com/xsd/dps/sip/message">
+  	<xb:package>com.exlibris.dps.sip.message.xmlbeans</xb:package>
+  </xb:namespace>
+
+  <xb:namespace uri="http://www.exlibrisgroup.com/xsd/dps/staging/service">
+  	<xb:package>com.exlibris.digitool.staging.service.xmlbeans</xb:package>
+  </xb:namespace>
+</xb:config>

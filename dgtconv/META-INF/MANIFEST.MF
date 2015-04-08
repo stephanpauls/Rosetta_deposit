@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Main-Class: com.exlibris.dps.sdk.dgtconv.FlowExample
+Class-Path: .
+
+Name: org/apache/log4j/
+Implementation-Title: log4j
+Implementation-Version: 1.2.14
+Implementation-Vendor: "Apache Software Foundation"
+
+Name: org/apache/xmlbeans/
+Comment: Apache XmlBeans version 2.3.0-r540734
+Implementation-Title: org.apache.xmlbeans
+Implementation-Version: 2.3.0-r540734
+Implementation-Vendor: Apache Software Foundation
+Implementation-URL: http://xmlbeans.apache.org/
+
+Name: oracle/sql/converter/
+Sealed: false
+
+Name: oracle/sql/
+Sealed: false
+
+Name: oracle/sql/converter_xcharset/
+Sealed: false
+
+Name: oracle/replay/driver/
+Sealed: false
+

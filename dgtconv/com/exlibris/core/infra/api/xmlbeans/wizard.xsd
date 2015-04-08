@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	targetNamespace="http://com/exlibris/core/web/wizard/xmlbeans"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:fr="http://com/exlibris/core/web/wizard/xmlbeans"
+	xmlns:page="http://com/exlibris/core/web/page/xmlbeans"
+	elementFormDefault="unqualified">
+
+	<xs:import namespace="http://com/exlibris/core/web/page/xmlbeans"
+		schemaLocation="http://wikilibris/wiki/images/2/21/X_page.xsd" />
+
+
+	<!--
+		wizard - base wizard definitions structure.
+		Elements:
+		1. Element : steps       - define the wizard steps.
+		2. Element : wizard_ui_type - define the wizard UI type (classic or tab).
+		3. Element : confirmation_messagebox - define if the wizard show confirmation message box in case the user
+		press the cancel button).
+
+	-->
+	<xs:element name="wizard">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="steps" type="fr:steps" minOccurs="1"
+					maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>
+							define the wizard steps
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="wizard_ui_type" type="fr:wizard_type"
+					minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>
+							define the wizard UI type (classic or
+							tab)define the wizard UI type (classic or
+							tab)
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="confirmation_messagebox"
+					type="xs:boolean" minOccurs="0" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>
+							define if the wizard show confirmation
+							message box in case the user press the
+							cancel button
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+
+			</xs:sequence>
+
+		</xs:complexType>
+	</xs:element>
+
+	<!--
+		Elements:
+		1.Element : backable   	   - define whether the user can go back in the given step.(default is true)
+		2.Element : url_template   - define the wizard page url and define the parameters needed for displaying
+		the wizard step.(for example licenseId).
+		3.Element : skippable       - define whether the given step can be skipped by code table defenition or not.
+		4.Element : cancelable   	- define whether the user can cancel the wizard in the given step.(default is true)
+		5.Element : custom_actions  - define additional buttons for the wizard. (in addition to the cancel,back, next/save)
+
+		Attributes:
+		2.Attribute : label   	  	- the display title of the wizard step (come form the code tables).
+
+	-->
+	<xs:complexType name="steps">
+		<xs:sequence>
+			<xs:element name="step" minOccurs="1"
+				maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="backable" type="xs:boolean"
+							minOccurs="0" maxOccurs="1" default="true">
+							<xs:annotation>
+								<xs:documentation>
+									define whether the user can go back
+									in the given step.(default is true)
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="cancelable" type="xs:boolean"
+							minOccurs="0" maxOccurs="1" default="true">
+							<xs:annotation>
+								<xs:documentation>
+									define whether the user can cancel
+									the wizard in the given
+									step.(default is true)
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="url_template" type="xs:string"
+							minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									define the wizard page url and
+									define the parameters needed for
+									displaying the wizard step
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="skippable" type="xs:boolean"
+							minOccurs="0" maxOccurs="1" default="false">
+							<xs:annotation>
+								<xs:documentation>
+									define whether the given step can be
+									skipped by code table definition or
+									not
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="custom_actions"
+							type="fr:custom_actions" minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									define additional buttons for the
+									wizard current step
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+
+					</xs:sequence>
+					<xs:attribute name="label" type="xs:string"
+						use="required">
+						<xs:annotation>
+							<xs:documentation>
+								the display title of the wizard step
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="custom_actions">
+		<xs:sequence>
+			<xs:element name="custom_action" type="page:x_button"
+				minOccurs="1" maxOccurs="unbounded">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="wizard_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Classic" />
+			<xs:enumeration value="Tab" />
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

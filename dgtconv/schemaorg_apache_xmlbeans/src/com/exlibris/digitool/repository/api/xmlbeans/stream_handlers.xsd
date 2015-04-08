@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sh="http://com/exlibris/digitool/common/streams/xmlbeans" targetNamespace="http://com/exlibris/digitool/common/streams/xmlbeans" elementFormDefault="unqualified">
+	
+	<xs:element name="digital_handlers">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="preingest_handler_utils" type="sh:preingest_handler_utils" maxOccurs="1"/>
+				<xs:element name="stream_handler_utils" type="sh:stream_handler_utils" maxOccurs="1"/>
+				<xs:element name="task_chain" type="sh:task_chain" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="preingest_handler_utils">
+		<xs:sequence>
+			<xs:element name="preingest_handler" type="sh:preingest_handler" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+		
+	<xs:complexType name="preingest_handler">		
+		<xs:sequence>
+			<xs:element name="handler" type="sh:handler" maxOccurs="unbounded"/>
+			<xs:element name="default_param" type="sh:default_param" maxOccurs="unbounded"/>
+		</xs:sequence>
+        <xs:attribute name="name" type="xs:string" />
+        <xs:attribute name="description" type="xs:string" />		
+        <xs:attribute name="task_name" type="xs:string" />
+	</xs:complexType>
+
+	<xs:complexType name="handler">
+		<xs:attribute name="file_ext" type="xs:string"/>
+		<xs:attribute name="stream_handler_util_ref" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:complexType name="stream_handler_utils">
+		<xs:sequence>
+			<xs:element name="stream_handler_util" type="sh:stream_handler_util" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="stream_handler_util">
+		<xs:sequence>
+			<xs:element name="event_details" type="sh:event_details" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string"/>
+		<xs:attribute name="type" type="sh:worker_type" default="java_class"/>		
+		<xs:attribute name="worker" type="xs:string"/>
+		<xs:attribute name="script" type="xs:boolean"/>
+		<xs:attribute name="params_pattern" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:complexType name="event_details">
+		<xs:attribute name="event_type" type="xs:string"/>
+		<xs:attribute name="event_purpose" type="xs:string"/>	
+		<xs:attribute name="event_details" type="xs:string"/>
+		<xs:attribute name="event_purpose_src" type="xs:string"/>
+		<xs:attribute name="software_used" type="xs:string"/>
+		<xs:attribute name="event_outcome" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:complexType name="task_chain">
+		<xs:sequence>
+			<xs:element name="preingest_handler_name" type="xs:string" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="chain_name" type="xs:string"/>
+		<xs:attribute name="id" type="xs:string"/>		
+	</xs:complexType>
+
+	<xs:complexType name="default_param">
+		<xs:attribute name="name" type="xs:string"/>
+		<xs:attribute name="param_name" type="xs:string"/>
+		<xs:attribute name="type" type="xs:string"/>		
+		<xs:attribute name="value" type="xs:string"/>
+		<xs:attribute name="default_values" type="xs:string"/>		
+		<xs:attribute name="handler_name" type="xs:string"/>
+        <xs:attribute name="description" type="xs:string" />		
+        <xs:attribute name="populator" type="xs:string" />				
+	</xs:complexType>
+
+	<xs:simpleType name="worker_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="java_class"/>
+			<xs:enumeration value="external_program"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

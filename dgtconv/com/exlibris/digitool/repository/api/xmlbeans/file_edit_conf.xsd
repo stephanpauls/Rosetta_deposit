@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.exlibrisgroup.com/xsd/digitool/repository/file_edit_conf" 
+			xmlns:fec="http://www.exlibrisgroup.com/xsd/digitool/repository/file_edit_conf" 
+			xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
+       <xs:element name="file_edit_conf">
+             <xs:complexType>
+                    <xs:sequence>
+                           <xs:element name="edit_group" minOccurs="0" maxOccurs="unbounded">
+                                 <xs:complexType>
+                                        <xs:sequence>
+										<xs:element name="edit_file" type="fec:edit_file" minOccurs="0" maxOccurs="unbounded"/>
+                                        </xs:sequence>
+                                        <xs:attribute name="group_type" type="xs:string" default="common"/>
+                                        <xs:attribute name="description" type="xs:string" default="Untitled"/>
+                                 </xs:complexType>
+                           </xs:element>
+                    </xs:sequence>
+             </xs:complexType>
+         <xs:unique name="FileId">
+	     <xs:selector xpath="edit_group/edit_file"/>
+	     <xs:field xpath="@id"/>
+	     </xs:unique>
+
+       </xs:element>
+
+
+
+           <xs:complexType  name="edit_file" >
+
+                        <xs:sequence>
+                               <xs:element name="file_name" type="xs:string"/>
+                               <xs:element name="description" type="xs:string"/>
+                               <xs:element name="tool_tip" type="xs:string" minOccurs="0"/>
+                               <xs:element name="validator" type="xs:string" minOccurs="0"/>
+                               <xs:element name="files" type="fec:edit_file" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:integer"/>
+                        <xs:attribute name="require_reload" type="xs:boolean" default="false"/>
+                        <xs:attribute name="auto_reload_after_save" type="xs:boolean" default="false"/>
+                        <xs:attribute name="directory" type="xs:boolean" default="false"/>
+                        <xs:attribute name="root_dir" type="xs:string" />
+           </xs:complexType>
+
+
+</xs:schema>
+
+ 

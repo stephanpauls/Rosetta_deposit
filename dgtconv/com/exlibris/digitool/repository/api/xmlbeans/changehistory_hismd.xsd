@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://com/exlibris/digitool/repository/api/xmlbeans" xmlns:pre="http://com/exlibris/digitool/repository/api/xmlbeans" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
+
+	<!--XML Schema for History of events Metedata. Created on 24/01/05 by Dana Schlesinger, Exlibris.
+		Based on the PREMIS Event Entity documentation and the NLNZ Preservation Metadata Process Entity section.-->
+
+	<xs:element name="history">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="events" type="pre:events"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="events">
+		<xs:sequence>
+			<xs:element name="event" type="pre:event" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="event">
+		<xs:sequence>
+			<xs:element name="eventIdentifier" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="eventIdentifierType" minOccurs="1" maxOccurs="1" type="xs:string"> 
+						<xs:annotation>
+							<xs:documentation>A designation used to uniquely identify the event within the preservation repository system</xs:documentation>
+						</xs:annotation>
+						</xs:element>
+						<xs:element name="eventIdentifierValue" minOccurs="1" maxOccurs="1" type="xs:string"> 
+						<xs:annotation>
+							<xs:documentation>The value of the event Identifier.</xs:documentation>
+						</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+					<xs:anyAttribute namespace="http://www.w3.org/1999/xlink/" /> 
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="eventType" minOccurs="1" maxOccurs="1" type="xs:string"> 
+			<xs:annotation>
+				<xs:documentation>Description of the event carried out. 
+					Possible values: compression, capture, deletion, fixity check, ingestion, migratio, normalization, validation, virus check etc.</xs:documentation>
+			</xs:annotation>
+			</xs:element>
+			<xs:element name="eventDateTime" minOccurs="1" maxOccurs="1" type="xs:dateTime"> 
+			<xs:annotation>
+				<xs:documentation>The date on which the event was carried out.</xs:documentation>
+			</xs:annotation>
+			</xs:element>
+			<xs:element name="eventDetail" minOccurs="0" maxOccurs="1" type="xs:string"> 
+			<xs:annotation>
+				<xs:documentation>Additional information about the event</xs:documentation>
+			</xs:annotation>
+			</xs:element>
+			<xs:element name="eventOutcomeInformation" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="eventOutcome" minOccurs="0" maxOccurs="1" type="xs:string" /> 
+						<xs:element name="eventOutcomeDetail" minOccurs="0" maxOccurs="1">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:any namespace="##any" processContents="lax" /> 
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="linkingAgentIdentifier" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="linkingAgentIdentifierType" minOccurs="1" maxOccurs="1" type="xs:string" /> 
+						<xs:element name="linkingAgentIdentifierValue" minOccurs="1" maxOccurs="1" type="xs:string" /> 
+						<xs:element name="linkingAgentRole" minOccurs="0" maxOccurs="unbounded" type="xs:string" /> 
+					</xs:sequence>
+					<xs:attribute name="LinkAgentXmlID" type="xs:IDREF" use="optional" /> 
+					<xs:anyAttribute namespace="http://www.w3.org/1999/xlink/" /> 
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="linkingObjectIdentifier" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="linkingObjectIdentifierType" minOccurs="1" maxOccurs="1" type="xs:string" /> 
+						<xs:element name="linkingObjectIdentifierValue" minOccurs="1" maxOccurs="1" type="xs:string" /> 
+					</xs:sequence>
+					<xs:attribute name="LinkObjectXmlID" type="xs:IDREF" use="optional" /> 
+					<xs:anyAttribute namespace="http://www.w3.org/1999/xlink/" /> 
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="xmlID" type="xs:ID" /> 
+	</xs:complexType>
+</xs:schema>
+
+<!--
+	<xs:complexType name="event">
+		<xs:annotation>
+			<xs:documentation>This is the root element of the History Schema</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="eventIdentifier" type="ch:typeOfeventIdentifierType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A designation used to uniquely identify the event within the preservation repository system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eventType" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Description of the event carried out. 
+						Possible values: compression, capture, deletion, fixity check, ingestion, migratio, normalization, validation, virus check etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eventPurpose" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The reason why the event was carried out.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eventDateTime" type="xs:dateTime" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The date on which the event was carried out.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eventDetail" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Additional information about the event</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="relatedAgentIdentifier" type="ch:TypeOfrelatedAgentIdentifierType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The individual(s), business unit and/or agency that carried out the event.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hardwareUsed" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Any hardwaer used to complete the event.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="softwareUsed" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Any software used to complete the event.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="steps" type="xs:string" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A description of actions performed to initiate and complete the event.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eventOutcome" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The outcomes of the event.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="guidelines" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Any standard or procedure followed when performing the event.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="comments" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A record of anything of relevance not covered elsewhere.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="typeOfeventIdentifierType">
+		<xs:sequence>
+			<xs:element name="eventIdentifierType" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A designation of the domain in which the event identifier is unique. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eventIdentifierValue" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The value of the event Identifier.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypeOfrelatedAgentIdentifierType">
+		<xs:sequence>
+			<xs:element name="relatedAgentIdentifierType" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A designation of the domain in which the related agent identifier is unique. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="relatedAgentIdentifierValue" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The value of the related agent Identifier.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="relatedAgentIdentifierRole" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The role of the agent in relation to this event. For example: Authorizer, Implementor, Validator, Executing Program etc.
+				</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
+-->

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://com/exlibris/digitool/common/forms/xmlbeans" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pd="http://com/exlibris/digitool/common/forms/xmlbeans" elementFormDefault="unqualified">
+	
+	<xs:element name="x_params">
+		<xs:complexType>
+	    	<xs:sequence>
+	      		<xs:element name="x_param" minOccurs="0" maxOccurs="unbounded">
+	        		<xs:complexType>
+	          			<xs:sequence>
+	            			<xs:element name="x_param_key"	 type="xs:string" minOccurs="1" maxOccurs="1"/>
+							<xs:element name="x_param_value" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

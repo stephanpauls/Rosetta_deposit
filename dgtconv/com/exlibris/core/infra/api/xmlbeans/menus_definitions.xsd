@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema
+	targetNamespace="http://com/exlibris/digitool/common/dynamicmenu/xmlbeans"
+	xmlns="http://com/exlibris/digitool/common/dynamicmenu/xmlbeans"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xs:element name="menus">
+		<xs:annotation>
+			<xs:documentation>menus definitions</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="menu" type="menu" minOccurs="0"
+					maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>
+							Starting a new sub-menu
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="menu">
+		<xs:sequence>
+			<xs:element name="include" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+
+						Import a menu XML in the current menu location.
+
+						The include value must be a four words key that
+						determine the location of the imported menu XML.
+
+						For Example: com.exlibris.training.menu ->
+						com/exlibris/training/menu.xml or it is a key in
+						the FILE_TABLE DB table.
+
+						Notice: 1. you must also configure the
+						"unique-key-old","url-path", and "url-old"
+						attributes. 2. in case you are importing a menu
+						you must supply in addition the menu new created
+						resource bundle keys @see unique-key-old.
+
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="unique-key" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+
+						Unique-key – the first four words for example
+						com.exlibris.training.menu are the key to the
+						whole menu, each menu key must start with those
+						words.
+
+						The first four words are also used to find the
+						location of the menu XML in the file directory.
+
+						For example: com.exlibris.training.menu ->
+						com/exlibris/training/menu.xml or to find the
+						menu in the FILE_TABLE. The key must be unique
+						in all of the menus
+
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="unique-key-old" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The attribute is valid only in case the include
+						attribute is configured.
+
+						In order to import a given XML in more then one
+						menu XML we must make sure that the new imported
+						keys are unique. The unique-key-old is the
+						prefix of the imported menu XML.
+
+						For example:
+						com.exlibris.test1.menu.general.menu.myModule ->
+						during the import process the prefix will be
+						replace all over the XML with the current menu
+						unique-key
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="url-path" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+
+						The attribute is valid only in case the include
+						attribute is configured.
+
+						The current menu module name.
+
+						For example: if the module in the current menu
+						is /TEST2/action/menu.do?... you need to
+						configure the TEST2 name in this attribute.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="url-old" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The attribute is valid only in case the include
+						attribute is configured.
+
+						The imported menu module name, this name will be
+						replaced all over the XML with "url-path"
+						attribute.
+
+						For example: if the module in the URLS is
+						/TEST/action/menus.do?... Then you need to
+						configure the TEST name in this attribute.
+
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="type" type="menuType" minOccurs="1"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Use "onlyHeader" to set a menu with linked-title
+						with no sub-links although it has childMenus.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The Menu label. The resource bundle definition
+						key is @unique-key@.bc
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="icon" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Menu icon in the home page
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Menu description. The resource bundle definition
+						key is @unique-key@.desc
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="breadCrumbsClass" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the icon in the breadcrumbs of the
+						sub menus
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="help" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="url" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						lead to a sub-menus
+						/@module-name@/action/menus.do?menuKey=@unique-key@
+						or lead to a screen
+						/@module-name@/action/@page-action-and-parameters@
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="visible-to" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						List of user roles. Only user with the given
+						role can see the menu.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="menu" type="menu" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						Sub-menu definition.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="enabled" type="xs:boolean" />
+	</xs:complexType>
+
+	<xs:simpleType name="menuType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="normal" />
+			<xs:enumeration value="onlyHeader" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://com/exlibris/digitool/repository/jobs/xmlbeans" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:rj="http://com/exlibris/digitool/repository/jobs/xmlbeans" elementFormDefault="unqualified">
+	
+	<xs:element name="job_report">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="name"				type="xs:string"				minOccurs="1" maxOccurs="1"/>
+				<xs:element name="description"		type="xs:string"				minOccurs="1" maxOccurs="1"/>
+				<xs:element name="status"			type="xs:string"				minOccurs="1" maxOccurs="1"/>
+				<xs:element name="started_at"		type="xs:string"				minOccurs="0" maxOccurs="1"/>
+				<xs:element name="completed_at"		type="xs:string"				minOccurs="0" maxOccurs="1"/>
+				<xs:element name="admin_unit"		type="xs:string"				minOccurs="0" maxOccurs="1"/>
+				<xs:element name="output_file_name"	type="xs:string"				minOccurs="1" maxOccurs="1"/>
+				<xs:element name="filters"	        type="rj:filters"				minOccurs="0" maxOccurs="1"/>
+				<xs:element name="report_table"		type="rj:report_table"			minOccurs="1" maxOccurs="1" />
+			</xs:sequence>
+			<xs:attribute name="html_xsl" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="filters">		
+		<xs:sequence> 	
+			<xs:element name="filter" type="rj:filter"	minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="filter">		 	
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="value" type="xs:string" />	
+	</xs:complexType>	
+	
+ 
+	<xs:complexType name="report_table">
+    	<xs:sequence>
+			<xs:element name="table_title"	type="xs:string"	minOccurs="0" maxOccurs="1"/>
+			<xs:element name="report_column_title"	type="xs:string"	minOccurs="0" maxOccurs="unbounded"/>
+      		<xs:element name="report_content"							minOccurs="1" maxOccurs="1">
+        		<xs:complexType>
+          			<xs:sequence>
+            			<xs:element name="report_content_tr" minOccurs="0" maxOccurs="unbounded">
+        					<xs:complexType>
+          						<xs:sequence>
+									<xs:element name="report_content_td" minOccurs="0" maxOccurs="unbounded">
+        								<xs:complexType>
+          									<xs:sequence> 
+												<xs:element name="text"  		type="xs:string"		minOccurs="0" maxOccurs="1"/>
+												<xs:element name="inner_table"	type="rj:report_table"	minOccurs="0" maxOccurs="1"/>
+											</xs:sequence>
+											<xs:attribute name="td_type" type="xs:string" />
+											<xs:attribute name="col_span" type="xs:string" />
+											<xs:attribute name="row_span" type="xs:string" />
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+								<xs:attribute name="tr_type" type="xs:string" />
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

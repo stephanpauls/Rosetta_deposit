@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.exlibrisgroup.com/xsd/digitool/repository/converting_rules" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"  xmlns:mr="http://www.exlibrisgroup.com/xsd/digitool/repository/converting_rules"> 
+
+<xs:element name="converting_rules">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name ="streams_mappings" type="mr:streams_mappings" minOccurs="1"  maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+<xs:complexType name ="streams_mappings"  >
+			<xs:sequence>
+				<xs:element name ="map" type="mr:map" minOccurs="0"  maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name ="create_complex"      type="xs:boolean" default="false" />  
+			</xs:complexType>
+	
+
+<xs:complexType name ="map">
+			<xs:sequence >
+			</xs:sequence>
+		<xs:attribute name ="stream_source"      		type="xs:string" />  
+		<xs:attribute name ="order"              		type="xs:string" /> 
+		<xs:attribute name ="usage_type"         		type="xs:string" />  
+	    <xs:attribute name ="usage_type_source"  		type="xs:string" /> 
+		<xs:attribute name ="preservation_level"    	type="xs:string" />  
+	    <xs:attribute name ="preservation_level_source" type="xs:string" /> 
+	    <xs:attribute name ="pid_source"  		 		type="xs:string" /> 
+		<xs:attribute name ="include_md"         		type="xs:boolean"  default="true"/>   
+</xs:complexType>
+
+
+</xs:schema> 

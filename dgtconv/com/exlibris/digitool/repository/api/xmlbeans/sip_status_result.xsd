@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  targetNamespace="http://www.exlibrisgroup.com/xsd/dps/staging/service"
+			xmlns="http://www.exlibrisgroup.com/xsd/dps/staging/service"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			elementFormDefault="unqualified" attributeFormDefault="unqualified">
+
+	<xs:element name="sip_status_result">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name ="is_error" type="xs:boolean" />
+				<xs:element name ="message_code" type="xs:string"/>
+				<xs:element name ="message_desc" type="xs:string"/>
+				<xs:element name ="sip_id" type="xs:string"/>
+				<xs:element name ="status" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

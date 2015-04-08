@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Guy (Exlibris) -->
+<xs:schema targetNamespace="http://com/exlibris/digitool/repository/api/xmlbeans" xmlns:de="http://com/exlibris/digitool/repository/api/xmlbeans" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
+	<xs:complexType name="control">
+		<xs:sequence>
+			<xs:element name="label" type="xs:string"/>
+			<xs:element name="note" type="xs:string"/>
+			<xs:element name="ingest_id" type="xs:string"/>
+     		<xs:element name="ingest_name" type="xs:string"/>
+			<xs:element name="entity_type" type="xs:string"/>
+			<xs:element name="usage_type" type="de:usage_type" default=""/>
+			<xs:element name="preservation_level" type="de:preservation_level" default="any"/>
+			<xs:element name="partition_a" type="xs:string"/>
+			<xs:element name="partition_b" type="xs:string"/>
+			<xs:element name="partition_c" type="xs:string"/>
+			<xs:element name="status_date" type="xs:string"/>
+			<xs:element name="status" type="xs:string"/>
+			<xs:element name="creation_date" type="xs:string"/>
+			<xs:element name="creator" type="xs:string"/>
+			<xs:element name="modification_date" type="xs:string"/>
+			<xs:element name="modified_by" type="xs:string"/>
+			<xs:element name="admin_unit" type="xs:string"/>
+			<!-- 0 - ANY, 1 - LOW, 2 - HIGH -->
+			<xs:element name="object_type" type="de:object_type"/>
+			<xs:element name="preservation_type" type="de:preservation_type"/>
+			<xs:element name="ordering_sequence" type="xs:int" default="1"/>
+			<xs:element name="delivery_priority" type="xs:int" default="1"/>
+			<xs:element name="parent_id" type="xs:string"/>
+			<xs:element name="group_id" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="usage_type">
+		<xs:union>
+		<xs:simpleType>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="archive"/>
+			<xs:enumeration value="view"/>
+			<xs:enumeration value="view_main"/>
+			<xs:enumeration value="index"/>
+			<xs:enumeration value="thumbnail"/>
+			<xs:enumeration value="any"/>
+			<!-- xs:enumeration value="webarchive"/-->
+		</xs:restriction>
+	    </xs:simpleType>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+			</xs:restriction>
+		</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="preservation_level">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="any"/>
+			<xs:enumeration value="low"/>
+			<xs:enumeration value="medium"/>
+			<xs:enumeration value="high"/>
+			<xs:enumeration value="critical"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="mds">
+		<xs:sequence>
+			<xs:element name="md" type="de:md" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="cmd" type="de:items_command" default="delete_and_insert_delta"/>
+	</xs:complexType>
+	<xs:complexType name="md">
+		<xs:sequence>
+			<xs:element name="mid" type="xs:string"/>
+			<xs:element name="vmid" type="xs:string"/>
+			<xs:element name="description" type="xs:string"/>
+			<xs:element name="name" type="de:md_name"/>
+			<xs:element name="type" type="de:md_type"/>
+			<xs:element name="value" type="xs:string"/>
+			<xs:element name="creator" type="xs:string"/>
+			<xs:element name="owner" type="xs:string"/>
+			<xs:element name="creation_date" type="xs:string"/>
+			<xs:element name="modification_date" type="xs:string"/>
+		</xs:sequence>
+		<xs:attribute name="cmd" type="de:item_command" default="update"/>
+		<xs:attribute name="link_to_exists" type="xs:boolean" default="false"/>
+		<xs:attribute name="copy_from_exists" type="xs:boolean" default="false"/>
+		<xs:attribute name="shared" type="xs:boolean" default="false"/>
+	</xs:complexType>
+	<xs:simpleType name="items_command">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="delete_and_insert_delta"/>
+			<xs:enumeration value="delete_and_insert_all"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="item_command">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="update"/>
+			<xs:enumeration value="insert"/>
+			<xs:enumeration value="delete"/>
+			<xs:enumeration value="none"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="md_name">
+		<xs:union>
+		<xs:simpleType>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="descriptive"/>
+			<xs:enumeration value="preservation"/>
+			<xs:enumeration value="technical"/>
+			<xs:enumeration value="accessrights"/>
+			<xs:enumeration value="rights"/>
+			<xs:enumeration value="copyrights"/>
+			<xs:enumeration value="filestructure"/>
+			<xs:enumeration value="changehistory"/>
+			<xs:enumeration value="mets_section"/>
+			<xs:enumeration value="mets_custom_amd"/>
+			<xs:enumeration value="mets_custom_dmd"/>
+			<xs:enumeration value="retentionpolicies"/>
+		</xs:restriction>
+	    </xs:simpleType>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+			</xs:restriction>
+		</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+
+	<xs:simpleType name="md_type">
+	<xs:union>
+	<xs:simpleType>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="dc"/>
+			<xs:enumeration value="marc"/>
+			<xs:enumeration value="exl24"/>
+			<xs:enumeration value="exl3"/>
+			<xs:enumeration value="jhove"/>
+			<xs:enumeration value="text_md"/>
+			<xs:enumeration value="image_niso"/>
+			<xs:enumeration value="audio_md"/>
+			<xs:enumeration value="video_md"/>
+			<xs:enumeration value="rights_md"/>
+			<xs:enumeration value="premis_rights"/>
+			<xs:enumeration value="copyrights_md"/>
+			<xs:enumeration value="preservation_md"/>
+			<xs:enumeration value="changehistory_md"/>
+			<xs:enumeration value="metsHdr"/>
+			<xs:enumeration value="fileSec"/>
+			<xs:enumeration value="structMap"/>
+			<xs:enumeration value="behaviorSec"/>
+			<xs:enumeration value="mods"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType>
+			<xs:restriction base="xs:string">
+			</xs:restriction>
+		</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+
+	<xs:complexType name="relations">
+		<xs:sequence>
+			<xs:element name="relation" type="de:relation" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="cmd" type="de:items_command" default="delete_and_insert_delta"/>
+	</xs:complexType>
+	<xs:complexType name="relation">
+		<xs:sequence>
+			<xs:element name="type" type="de:relation_type"/>
+			<xs:element name="pid" type="xs:string"/>
+			<xs:element name="vpid" type="xs:string"/>
+			<xs:element name="label" type="xs:string"/>
+			<xs:element name="note" type="xs:string"/>
+			<xs:element name="usage_type" type="de:usage_type" default=""/>
+			<xs:element name="creation_date" type="xs:string"/>
+			<xs:element name="modification_date" type="xs:string"/>
+			<xs:element name="file_extension" type="xs:string"/>
+			<xs:element name="mime_type" type="xs:string"/>
+			<xs:element name="external_type" type="xs:int" minOccurs="0"/>
+			<xs:element name="directory_path" type="xs:string"/>
+			<xs:element name="entity_type" type="xs:string"/>
+			<xs:element name="file_id" type="xs:string"/>
+			<xs:element name="urls" type="de:urls"/>
+			<xs:element name="indexs" type="de:indexs" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="cmd" type="de:item_command" default="update"/>
+	</xs:complexType>
+	<xs:complexType name="stream_ref">
+		<xs:sequence>
+			<xs:element name="file_name" type="xs:string"/>
+			<xs:element name="file_extension" type="xs:string"/>
+			<xs:element name="mime_type" type="xs:string"/>
+			<xs:element name="root_handle" type="xs:string"/>
+			<xs:element name="directory_path" type="xs:string"/>
+			<xs:element name="file_id" type="xs:string"/>
+			<xs:element name="storage_id" type="xs:int" minOccurs="0"/>
+			<xs:element name="external_type" type="xs:int" minOccurs="0"/>
+			<xs:element name="file_size_bytes" type="xs:long" minOccurs="0"/>
+			<xs:element name="file_original_id" type="xs:string" />
+			<xs:element name="file_format_library_id" type="xs:int" />
+			<!-- common -->
+			<!-- incoming -->
+			<!-- outgoing -->
+		</xs:sequence>
+		<xs:attribute name="store_command" type="de:store_command" default="move"/>
+		<xs:attribute name="location" type="de:location" default="nfs"/>
+		<xs:attribute name="cmd" type="de:item_command" default="none"/>
+	</xs:complexType>
+	<xs:simpleType name="relation_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="part_of"/>
+			<xs:enumeration value="include"/>
+			<xs:enumeration value="manifestation"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="store_command">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="copy"/>
+			<xs:enumeration value="move"/>
+			<xs:enumeration value="link"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="location">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="http"/>
+			<xs:enumeration value="nfs"/>
+			<xs:enumeration value="attached"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="interface_version">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1.0"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+
+	<xs:complexType name="sections">
+		<xs:sequence>
+			<xs:element name="section" type="de:section" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="command">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="create"/>
+			<xs:enumeration value="retrieve"/>
+			<xs:enumeration value="update"/>
+			<xs:enumeration value="delete"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- section options: -->
+	<!-- extended_relation: retrieve additional information on each related entity. -->
+    <!-- url: retrieve deep link urls information on the digital entity,            -->
+    <!--      and on its relations if  extended_relation section is also defined.   -->
+    <!-- metadata_skeleton: does not retrieve the value of the metadata             -->
+    <!--                     just the name,type,mid.                                -->
+
+	<xs:simpleType name="section">
+		<xs:union>
+		<xs:simpleType>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="extended_relation"/>
+			<xs:enumeration value="url"/>
+			<xs:enumeration value="metadata_skeleton"/>
+		</xs:restriction>
+	    </xs:simpleType>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+			</xs:restriction>
+		</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+
+	<xs:complexType name="urls">
+		<xs:sequence>
+			<xs:element name="url" type="de:url" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="url" mixed="true">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="type" type="de:url_type"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="url_type">
+		<xs:union>
+		<xs:simpleType>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="stream"/>
+			<xs:enumeration value="stream_manifestation"/>
+			<xs:enumeration value="raw_metadata"/>
+			<xs:enumeration value="formatted_metadata"/>
+			<xs:enumeration value="descriptive_metadata"/>
+			<xs:enumeration value="resource_discovery"/>
+		</xs:restriction>
+		</xs:simpleType>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+			</xs:restriction>
+		</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+
+	<xs:complexType name="indexs">
+		<xs:sequence>
+			<xs:element name="index" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<!-- ********************************************************************-->
+	<!-- **************************** SEARCH ********************************-->
+	<!-- ********************************************************************-->
+	<xs:element name="x_queries">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="x_query" type="de:x_query" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="x_query">
+		<xs:sequence>
+			<xs:element name="x_header" type="de:x_header"/>
+			<xs:element name="x_select" type="de:x_select"/>
+			<xs:element name="x_where" type="de:x_where" maxOccurs="unbounded"/>
+			<xs:element name="x_sorting" type="de:x_sorting" maxOccurs="unbounded"/>
+			<xs:element name="x_view_columns" type="de:x_view_columns" maxOccurs="unbounded"/>
+			<xs:element name="x_facets" type="de:x_facets" maxOccurs="unbounded"/>
+			<xs:element name="hql" type="xs:string"/>
+		</xs:sequence>
+		<xs:attribute name="set_name" type="xs:string"/>
+		<xs:attribute name="type" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="x_header">
+		<xs:attribute name="classification" type="xs:string"/>
+		<xs:attribute name="format" type="xs:string"/>
+		<xs:attribute name="risk" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="x_select">
+		<xs:sequence>
+			<xs:element name="element" type="de:x_populate_elements"/>
+			<xs:element name="object_type" type="de:object_type"/>
+		</xs:sequence>
+		<xs:attribute name="from_answer" type="xs:int"/>
+		<xs:attribute name="to_answer" type="xs:int"/>
+	</xs:complexType>
+	<xs:simpleType name="x_populate_elements">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="pid"/>
+			<xs:enumeration value="control"/>
+			<xs:enumeration value="all"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="x_where">
+		<xs:sequence>
+			<xs:element name="x_where" type="de:x_where" maxOccurs="unbounded"/>
+			<xs:element name="x_condition" type="de:x_condition" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="object_type" type="de:object_type"/>
+		<xs:attribute name="from" type="de:x_form"/>
+		<xs:attribute name="operator" type="xs:string"/>
+	</xs:complexType>
+	<xs:simpleType name="x_form">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="HDeControl"/>
+			<xs:enumeration value="HDeMetadata"/>
+			<xs:enumeration value="HDeStreamRef"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="x_condition">
+		<xs:sequence>
+			<xs:element name="type" type="de:x_type"/>
+			<xs:element name="element" type="xs:string"/>
+			<xs:element name="value" type="xs:string"/>
+			<xs:element name="ui_value" type="xs:string"/>
+		</xs:sequence>
+		<xs:attribute name="operator" type="xs:string"/>
+	</xs:complexType>
+	<xs:simpleType name="x_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="equal"/>
+			<xs:enumeration value="start_with"/>
+			<xs:enumeration value="end_with"/>
+			<xs:enumeration value="contain"/>
+			<xs:enumeration value="pattern"/>
+			<xs:enumeration value="before"/>
+			<xs:enumeration value="after"/>
+			<xs:enumeration value="outer_equal"/>
+			<xs:enumeration value="greater_than"/>
+			<xs:enumeration value="greater_equal"/>
+			<xs:enumeration value="less_than"/>
+			<xs:enumeration value="less_equal"/>
+			<xs:enumeration value="like"/>
+			<xs:enumeration value="not_equal"/>
+			<xs:enumeration value="in"/>
+			<xs:enumeration value="not_in"/>
+			<xs:enumeration value="is_empty"/>
+			<xs:enumeration value="is_not_empty"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="x_sorting">
+		<xs:sequence>
+			<xs:element name="x_sort" type="de:x_sort" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="object_type" type="de:object_type"/>
+	</xs:complexType>
+	<xs:complexType name="x_sort">
+		<xs:sequence>
+			<xs:element name="by" type="xs:string"/>
+			<xs:element name="x_order" type="de:x_order"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="x_view_columns">
+		<xs:sequence>
+			<xs:element name="x_column" type="de:x_column" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="object_type" type="de:object_type"/>
+	</xs:complexType>
+	<xs:complexType name="x_column">
+		<xs:sequence>
+			<xs:element name="column" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="x_facets">
+		<xs:sequence>
+			<xs:element name="x_facet" type="de:x_facet" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="object_type" type="de:object_type"/>
+	</xs:complexType>
+	<xs:complexType name="x_facet">
+		<xs:sequence>
+			<xs:element name="field" type="xs:string"/>
+			<xs:element name="value" type="xs:string" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="x_order">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="desc"/>
+			<xs:enumeration value="asc"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Result -->
+	<xs:complexType name="x_result">
+		<xs:sequence>
+		<!-- REMOVED BY SHAI
+			<xs:element ref="de:digital_entity" maxOccurs="unbounded"/>
+			 -->
+			<xs:element name="error" type="xs:boolean"/>
+			<xs:element name="error_description" type="xs:string"/>
+		</xs:sequence>
+		<xs:attribute name="set_name" type="xs:string"/>
+		<xs:attribute name="num_results" type="xs:int"/>
+		<xs:attribute name="total_num_results" type="xs:int"/>
+	</xs:complexType>
+	<xs:simpleType name="object_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="intellectual_entity" />
+			<xs:enumeration value="representation" />
+			<xs:enumeration value="file" />
+			<xs:enumeration value="all" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="preservation_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="preservation_master" />
+			<xs:enumeration value="old_preservation_master" />
+			<xs:enumeration value="access_copy" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

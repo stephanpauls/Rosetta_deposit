@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project dps-sdk-deposit_3.0">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="C:/dps-sdk-3.0.1/dps-sdk-projects/dps-sdk-deposit/dgtconv.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="com.exlibris.dps.sdk.dgtconv.FlowExample"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="C:/dps-sdk-3.0.1/dps-sdk-projects/dps-sdk-deposit/bin"/>
+            <fileset dir="C:/dps-sdk-3.0.1/dps-sdk-projects/dps-sdk-deposit/conf"/>
+            <fileset dir="C:/dps-sdk-3.0.1/dps-sdk-projects/dps-sdk-deposit/data"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/dps-sdk-3.0.1/dps-sdk-projects/dps-sdk-deposit/lib/commons-codec-1.3.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/dps-sdk-3.0.1/dps-sdk-projects/dps-sdk-deposit/lib/dom4j-1.6.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/dps-sdk-3.0.1/dps-sdk-projects/dps-sdk-deposit/lib/jxl-2.6.9.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/dps-sdk-3.0.1/dps-sdk-projects/dps-sdk-deposit/lib/log4j-1.2.14.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/dps-sdk-3.0.1/dps-sdk-projects/dps-sdk-deposit/lib/xmlbeans-2.3.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/dps-sdk-3.0.1/dps-sdk-projects/dps-sdk-deposit/lib/jaxen-1.1-beta-6.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/dps-sdk-3.0.1/dps-sdk-projects/dps-sdk-deposit/lib/dps-sdk-3.0.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/dps-sdk-3.0.1/dps-sdk-projects/dps-sdk-deposit/lib/ojdbc6.jar"/>
+        </jar>
+    </target>
+</project>

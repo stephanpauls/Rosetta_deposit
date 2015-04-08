@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Guy (Exlibris) -->
+<xs:schema targetNamespace="http://com/exlibris/digitool/common/jobs/xmlbeans" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ig="http://com/exlibris/digitool/common/jobs/xmlbeans" elementFormDefault="unqualified">
+	
+	<xs:element name="ingest_settings">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="pretransformer_task_class" type="xs:string"/>
+				<xs:element name="transformer_task" type="ig:transformer_task"/>
+				<xs:element name="tasks_chain" type="ig:tasks_chain"/>
+				<xs:element name="ingest_task" type="ig:ingest_task"/>
+				<xs:element name="acquire" type="ig:acquire" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="ingest_access_rights" type="ig:ingest_access_rights"/>
+				<xs:element name="description" type="xs:string"/>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="transformer_task">
+		<xs:sequence>
+			<xs:element name="param" type="ig:param" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string"/>
+		<xs:attribute name="class_name" type="xs:string"/>
+	</xs:complexType>
+	
+	<xs:complexType name="param">
+		<xs:attribute name="name" type="xs:string"/>	
+		<xs:attribute name="label" type="xs:string"/>	
+		<xs:attribute name="value" type="xs:string"/>
+		<xs:attribute name="visible"  type="xs:boolean" default="true"/> 
+		<xs:attribute name="editable"  type="xs:boolean" default="true"/> 
+	</xs:complexType>	
+	
+	<xs:complexType name="tasks_chain">
+		<xs:sequence>
+			<xs:element name="task_settings" type="ig:task_settings" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string"/>
+	</xs:complexType>
+	
+	<xs:complexType name="task_settings">
+		<xs:sequence>
+			<xs:element name="param" type="ig:param" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string"/>
+		<xs:attribute name="id" type="xs:string"/>		
+		<xs:attribute name="task_name" type="xs:string"/>		
+	</xs:complexType>
+	
+	<xs:complexType name="acquire">
+		<xs:sequence>
+			<xs:element name="param" type="ig:param" maxOccurs="unbounded"/>
+			<xs:element name="id" type="xs:string"/>
+			<xs:element name="label" type="xs:string"/>
+		</xs:sequence>
+		<xs:attribute name="adapter_class" type="xs:string"/>
+	    <xs:attribute name="data_format" type="xs:string"/>
+	    <xs:attribute name="continue_on_warning" type="xs:boolean" default="true"/>
+	</xs:complexType>
+	
+	
+	<xs:complexType name="ingest_task">		
+		<xs:sequence>
+			<xs:element name="param" type="ig:param" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string"/>							
+	</xs:complexType>
+	
+	<xs:complexType name="ingest_access_rights">
+		<xs:sequence>
+			<xs:element name="access_right_id" type="xs:string" minOccurs="0"/>
+			<xs:element name="pds_user_id" type="xs:string" minOccurs="0"/>
+			<xs:element name="param" type="ig:param" maxOccurs="unbounded"/>
+		</xs:sequence>		
+	</xs:complexType>
+	
+</xs:schema>

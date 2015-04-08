@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pf="http://www.exlibrisgroup.com/xsd/digitool/profile" xmlns:rl="http://www.exlibrisgroup.com/xsd/digitool/rule" targetNamespace="http://www.exlibrisgroup.com/xsd/digitool/profile" elementFormDefault="unqualified">
+
+	<xs:import namespace="http://www.exlibrisgroup.com/xsd/digitool/rule" schemaLocation="de_rule.xsd"/>
+	
+	<xs:element name="pi_profile_rule">
+		<xs:complexType> 
+			<xs:sequence>				
+				<xs:element name="pi_profile" type="pf:pi_profile" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="rl:de_rule" minOccurs="0" maxOccurs="unbounded"/>				
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+		
+	<xs:complexType name="pi_profile"> 
+		<xs:sequence>				
+			<xs:element name="pi_type" type="xs:string" minOccurs="0" maxOccurs="1" />
+			<xs:element name="pi_preffix" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="pi_generator_class" type="xs:string" minOccurs="1" maxOccurs="1"/>						
+			<xs:element name="base_url" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="md_template" type="xs:string" minOccurs="0" maxOccurs="1"/>			
+			<xs:element name="overwrite_external" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	
+
+</xs:schema>

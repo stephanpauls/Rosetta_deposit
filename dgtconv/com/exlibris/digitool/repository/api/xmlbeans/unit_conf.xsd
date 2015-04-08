@@ -1,0 +1,121 @@
+<xs:schema targetNamespace="http://com/exlibris/digitool/repository/unitConf/xmlbeans"
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:uc="http://com/exlibris/digitool/repository/unitConf/xmlbeans"
+		   xmlns:ig="http://com/exlibris/digitool/common/jobs/xmlbeans"
+		   elementFormDefault="unqualified">
+
+	<xs:import namespace="http://com/exlibris/digitool/common/jobs/xmlbeans" schemaLocation="ingest_settings.xsd"/>
+
+	<xs:element name="unit_configuration">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="access_rights" type="uc:access_rights" maxOccurs="1"/>
+				<xs:element name="retention_policies" type="uc:retention_policies" maxOccurs="1"/>
+				<xs:element name="acquire_sources" type="uc:acquire_sources" maxOccurs="1"/>
+				<xs:element name="parameters" type="uc:parameters" maxOccurs="1"/>
+				<xs:element name="jobs" type="uc:jobs"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="parameters">
+		<xs:sequence>
+			<xs:element name="parameter" type="uc:parameter" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="parameter">
+			<xs:sequence>
+				<xs:element name="key" type="xs:string" maxOccurs="1"/>
+				<xs:element name="value" type="xs:string" maxOccurs="1"/>
+			</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="access_rights">
+		<xs:sequence>
+			<xs:element name="access_right" type="uc:access_right" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="retention_policies">
+		<xs:sequence>
+			<xs:element name="retention_policiy" type="uc:retention_policy" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="acquire_sources">
+		<xs:sequence>
+			<xs:element name="acquire" type="ig:acquire" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="access_right">
+		<xs:sequence>
+			<xs:element name="description" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="explanation" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="mid" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="template" type="xs:string"  minOccurs="0" maxOccurs="1"/>
+			<xs:element name="restrictions" type="uc:restrictions"  minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="type" type="uc:ar_type"/>
+		<xs:attribute name="name" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:complexType name="retention_policy">
+		<xs:sequence>
+			<xs:element name="description" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="mid" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="template" type="xs:string"  minOccurs="0" maxOccurs="1"/>
+			<xs:element name="restrictions" type="uc:restrictions"  minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="type" type="uc:ar_type"/>
+		<xs:attribute name="name" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:simpleType name="ar_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="create_new"/>
+			<xs:enumeration value="link_to_exist"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="restrictions">
+		<xs:sequence>
+			<xs:element name="restriction" type="uc:restriction" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="restriction">
+		<xs:attribute name="key" type="xs:string"/>
+	</xs:complexType>
+
+		<xs:complexType name="jobs">
+		<xs:sequence>
+			<xs:element name="job" type="uc:job" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="job">
+		<xs:sequence>
+			<xs:element name="job-class" type="xs:string"/>
+			<xs:element name="scheduling" type="uc:scheduling"/>
+			<xs:element name="parameters" type="uc:parameters" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string"/>
+		<xs:attribute name="enable" type="xs:boolean" default="true"/>
+	</xs:complexType>
+	<xs:complexType name="scheduling " mixed="true">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="type" type="uc:type"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="days"/>
+			<xs:enumeration value="minutes"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+</xs:schema>

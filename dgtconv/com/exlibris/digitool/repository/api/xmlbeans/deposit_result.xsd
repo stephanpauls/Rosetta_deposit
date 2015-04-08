@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  targetNamespace="http://www.exlibrisgroup.com/xsd/dps/deposit/service"
+			xmlns="http://www.exlibrisgroup.com/xsd/dps/deposit/service"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+<xs:element name="deposit_result">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name ="is_error" type="xs:boolean" />
+				<xs:element name ="message_code" type="xs:string"/>
+				<xs:element name ="message_desc" type="xs:string"/>
+				<xs:element name ="sip_id" type="xs:long"/>
+				<xs:element name ="deposit_activity_id" type="xs:long"/>
+				<xs:element name ="user_params" type="xs:string"/>
+				<xs:element name ="creation_date" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

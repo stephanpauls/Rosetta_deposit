@@ -1,0 +1,27 @@
+*.xls
+*.class
+/dgtconv.properties
+conf/ingest.properties
+log/ingest.log
+deposit.jar
+dgtconv.jar
+
+#################
+## Eclipse
+#################
+
+*.pydevproject
+.project
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+installationProfile/login.xml
+*~

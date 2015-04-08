@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	targetNamespace="http://www.exlibrisgroup.com/xsd/dps/backoffice/service"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:bo="http://www.exlibrisgroup.com/xsd/dps/backoffice/service"
+	elementFormDefault="unqualified"
+	xsl:exclude-result-prefixes="xs bo #default">
+
+		<xs:element name="producer_info">
+			<xs:complexType>
+				<xs:all>
+					<xs:element name ="status" type="bo:producer_status"
+						minOccurs="1" maxOccurs="1"/>
+					<xs:element name ="expiry_date" type="xs:string"
+						minOccurs="1" maxOccurs="1"/>
+					<xs:element name ="telephone_1" type="xs:string"/>
+					<xs:element name ="telephone_2 " type="xs:string" />
+					<xs:element name ="web_site" type="xs:string" />
+					<xs:element name ="zip_code" type="xs:long" />
+					<xs:element name ="email" type="xs:string" />
+					<xs:element name ="institution" type="xs:string" />
+					<xs:element name ="department" type="xs:string" />
+					<xs:element name ="user_name" type="xs:string" />
+					<xs:element name ="first_name" type="xs:string" />
+					<xs:element name ="last_name" type="xs:string" />
+					<xs:element name ="street" type="xs:string" />
+					<xs:element name ="suburb " type="xs:string" />
+					<xs:element name ="city" type="xs:string" />
+					<xs:element name ="country" type="xs:string" />
+					<xs:element name ="authoritative_name" type="xs:string" />
+					<xs:element name ="account_type" type="bo:producer_account_type" />
+					<!-- xs:element name ="classification " type="" / -->
+					<xs:element name ="email_notify" type="xs:string" />
+					<xs:element name ="notes" type="xs:string" />
+					<xs:element name ="local_field_1" type="xs:string" />
+					<xs:element name ="fax" type="xs:string" />
+					<xs:element name ="producer_group" type="xs:string" />
+					<xs:element name ="negotiator_id" type="xs:long" />
+					<xs:element name ="contactUser_id_1" type="xs:long"
+						minOccurs="1" maxOccurs="1"/>
+					<xs:element name ="contactUser_id_2" type="xs:long" />
+					<xs:element name ="contactUser_id_3" type="xs:long" />
+					<xs:element name ="contactUser_id_4" type="xs:long" />
+					<xs:element name ="contactUser_id_5" type="xs:long" />
+					<xs:element name ="producerProfile_id" type="xs:long"
+						minOccurs="1" maxOccurs="1"/>
+				</xs:all>
+			</xs:complexType>
+		</xs:element>
+
+		<xs:simpleType name="producer_status">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="ACTIVE" />
+				<xs:enumeration value="INACTIVE" />
+			</xs:restriction>
+		</xs:simpleType>
+
+		<xs:simpleType name="producer_account_type">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="INDIVIDUAL" />
+				<xs:enumeration value="GROUP" />
+			</xs:restriction>
+		</xs:simpleType>
+
+</xs:schema>

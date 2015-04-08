@@ -1,0 +1,227 @@
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Guy (Exlibris) -->
+<xs:schema targetNamespace="http://com/exlibris/digitool/repository/conf/xmlbeans" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cf="http://com/exlibris/digitool/repository/conf/xmlbeans" xmlns:fr="http://com/exlibris/digitool/common/forms/xmlbeans" xmlns:rj="http://com/exlibris/digitool/repository/conf/xmlbeans" elementFormDefault="unqualified">
+
+	<xs:import namespace="http://com/exlibris/digitool/common/forms/xmlbeans" schemaLocation="x_form.xsd"/>
+
+
+	<xs:element name="rp_configuration">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="metadatas" type="cf:metadatas" maxOccurs="1"/>
+				<xs:element name="modules" type="cf:modules" maxOccurs="1"/>
+				<xs:element name="transformers" type="cf:transformers" maxOccurs="1"/>
+				<xs:element name="de_services" type="cf:de_services" maxOccurs="1"/>
+				<xs:element name="send_messages" type="cf:send_messages" maxOccurs="1"/>
+				<xs:element name="data_sources" type="cf:data_sources" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="rp_jobs_configuration">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="repository_jobs" type="rj:repository_jobs" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="modules">
+			<xs:sequence>
+				<xs:element name="module" type="cf:module" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="module">
+			<xs:sequence>
+				<xs:element name="parameters" type="cf:parameters" maxOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:complexType name="parameters">
+			<xs:sequence>
+				<xs:element name="parameter" type="cf:parameter" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="parameter">
+			<xs:sequence>
+				<xs:element name="p_key" type="xs:string" maxOccurs="1"/>
+				<xs:element name="p_val" type="xs:string" maxOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute name="type" type="cf:display_type"/>
+			<xs:attribute name="description" type="xs:string"/>
+			<xs:attribute name="default_values" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:complexType name="transformer_parameters">
+			<xs:sequence>
+				<xs:element name="transformer_parameter" type="cf:transformer_parameter" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="transformer_parameter">
+			<xs:attribute name="file_target" type="xs:string"/>
+			<xs:attribute name="file_source" type="xs:string"/>
+			<xs:attribute name="type" type="cf:display_type"/>
+			<xs:attribute name="description" type="xs:string"/>
+			<xs:attribute name="file_name" type="xs:string"/>
+			<xs:attribute name="name" type="xs:string"/>
+			<xs:attribute name="value" type="xs:string"/>
+			<xs:attribute name="options" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:complexType name="metadatas">
+			<xs:sequence>
+				<xs:element name="metadata" type="cf:metadata" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="metadata">
+		<xs:sequence>
+			<xs:element name="id" type="xs:int"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="type" type="xs:string"/>
+			<xs:element name="allow_multiple" type="xs:boolean"/>
+			<xs:element name="is_relevant_to_ie" type="xs:boolean"/>
+			<xs:element name="is_relevant_to_rep" type="xs:boolean"/>
+			<xs:element name="is_relevant_to_file" type="xs:boolean"/>
+			<xs:element name="validation_schema" type="xs:string"/>
+			<xs:element name="supported_schemas" type="cf:supported_schemas" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="supported_schemas">
+			<xs:sequence>
+				<xs:element name="namespace_uri" type="xs:string"/>
+				<xs:element name="namespace_prefix" type="xs:string"/>
+				<xs:element name="local_schema" type="xs:string"/>
+			</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="data_sources">
+		<xs:sequence>
+	        <xs:element name="data_source" type="cf:data_source" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="data_source">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="id" type="xs:int" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="adapter_class" type="xs:string" maxOccurs="1"/>
+            <xs:element name="data_source_parameters" type="cf:data_source_parameters" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="transport_protocol" type="xs:string"/>
+        <xs:attribute name="valid_transformers_ids" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="data_source_parameters">
+		<xs:sequence>
+	        <xs:element name="data_source_parameter" type="cf:data_source_parameter" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+      <xs:complexType   name="data_source_parameter" >
+        <xs:simpleContent>
+          <xs:extension base="xs:string">
+            <xs:attribute name="visible"  type="xs:boolean" default="false"/>
+            <xs:attribute name="editable" type="xs:boolean" default="false"/>
+            <xs:attribute name="name"     type="xs:string"/>
+          </xs:extension>
+       </xs:simpleContent>
+      </xs:complexType>
+
+	<xs:complexType name="repository_jobs">
+		<xs:sequence>
+			<xs:element name="repository_job" type="cf:repository_job" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="repository_job">
+		<xs:sequence>
+			<xs:element name="job_class" type="xs:string"/>
+			<xs:element name="ui_description" type="xs:string"/>
+			<xs:element name="ui_explanation" type="xs:string"/>
+			<xs:element name="output_file_name" type="xs:string"/>
+			<xs:element ref="fr:x_form"/>
+			<xs:element name="report_xsd" type="xs:string"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string"/>
+		<xs:attribute name="type" type="xs:string"/>
+		<xs:attribute name="super_user_only" type="xs:boolean"/>
+
+	</xs:complexType>
+
+	<xs:simpleType name="display_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="combo"/>
+			<xs:enumeration value="file"/>
+			<xs:enumeration value="acquire"/>
+     		<xs:enumeration value="text"/>
+			<xs:enumeration value="boolean"/>
+			<xs:enumeration value="generic_combo"/>
+
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="job_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="report"/>
+			<xs:enumeration value="maintenance"/>
+			<xs:enumeration value="indexing"/>
+			<xs:enumeration value="processing"/>
+			<xs:enumeration value="general"/>
+			<xs:enumeration value="cleanup"/>
+			<xs:enumeration value="importexport"/>
+			<xs:enumeration value="replication"/>
+			<xs:enumeration value="synchronization"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="transformers">
+		<xs:sequence>
+			<xs:element name="transformer" type="cf:transformer" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="transformer">
+		<xs:sequence>
+			<xs:element name="id" type="xs:int"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="description" type="xs:string"/>
+			<xs:element name="deposit_name" type="xs:string"/>
+			<xs:element name="for_deposit_use" type="xs:boolean"/>
+			<xs:element name="transformer_class" type="xs:string"/>
+			<xs:element name="pretransformer_class" type="xs:string"/>
+			<xs:element name="transformer_parameters" type="cf:transformer_parameters"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="de_services">
+		<xs:sequence>
+			<xs:element name="de_service" type="cf:de_service" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="de_service">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="description" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="send_messages">
+		<xs:sequence>
+			<xs:element name="send_message" type="cf:send_message" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="send_message">
+			<xs:sequence>
+				<xs:element name="parameter" type="cf:parameter" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="type" type="xs:string"/>
+	</xs:complexType>
+
+</xs:schema>

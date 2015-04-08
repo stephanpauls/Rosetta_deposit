@@ -1,0 +1,28 @@
+<pl:metadata-config xmlns:pl="http://www.exlibrisgroup.com/Plugins/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+  <pl:pluginTypeName>NotificationAdapterPlugin</pl:pluginTypeName>
+  <pl:deployName>SMSAdapter</pl:deployName>
+  <pl:className>com.exlibris.core.infra.svc.api.notificationAdapters.SMSAdapter</pl:className>
+  <pl:description>SNS Notification Adapter Plugin</pl:description>
+  <pl:version>1</pl:version>
+   <pl:materialType>ALL</pl:materialType>
+  <pl:generalType>ADAPTOR</pl:generalType>
+  <pl:publicApi>Y</pl:publicApi>
+   <pl:initParameters>
+    </pl:initParameters>
+  <pl:implType>java</pl:implType>
+  <pl:contactPerson  >
+    <contact_info xmlns="http://www.exlibrisgroup.com/Plugins/1.0/">
+      <contactType>admin</contactType>
+      <firstName>Exlibris</firstName>
+      <lastName>Exlibris</lastName>
+      <telephone1></telephone1>
+      <telephone2></telephone2>
+      <email></email>
+      <address1></address1>
+      <address2></address2>
+      <city></city>
+      <zipCode></zipCode>
+      <country></country>
+    </contact_info>
+  </pl:contactPerson>
+</pl:metadata-config>

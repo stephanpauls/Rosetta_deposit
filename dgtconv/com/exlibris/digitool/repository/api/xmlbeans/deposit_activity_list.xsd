@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  targetNamespace="http://www.exlibrisgroup.com/xsd/dps/deposit/service"
+			xmlns:dep="http://www.exlibrisgroup.com/xsd/dps/deposit/service"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+		<xs:element name="deposit_activity_list">
+
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element name ="is_error" type="xs:boolean" />
+					<xs:element name ="error_description" type="xs:string"/>
+					<xs:element name ="total_records" type="xs:long"/>
+					<xs:element name="records" type="dep:records" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+
+		<xs:complexType name="records">
+			<xs:sequence>
+				<xs:element name="record" minOccurs="0"
+					maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="dep:record" />
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="record">
+		<xs:all>
+			<xs:element name="deposit_activity_id" type="xs:long" minOccurs="1"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						deposit_activity_id
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creation_date" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						creation_date
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="status" type="dep:deposit_activity_status" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						deposit_activity_status: Inprocess,Incomplete,Rejected,Draft,Approved,Declined
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="title" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						title
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="producer_agent_id" type="xs:long" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						producer_agent_id
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="submit_date" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						submit_date
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="update_date" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						update_date
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sip_id" type="xs:long" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						sip_id
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="producer_id" type="xs:long" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						producer_id
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sip_reason" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						sip_reason
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+		<xs:attribute name="id" type="xs:long" />
+	</xs:complexType>
+
+	<xs:simpleType name="deposit_activity_status">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Inprocess" />
+			<xs:enumeration value="Incomplete" />
+			<xs:enumeration value="Rejected" />
+			<xs:enumeration value="Draft" />
+			<xs:enumeration value="Approved" />
+			<xs:enumeration value="Declined" />
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

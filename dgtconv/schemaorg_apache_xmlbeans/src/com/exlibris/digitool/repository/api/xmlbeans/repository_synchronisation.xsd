@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.exlibrisgroup.com/xsd/digitool/repository/synchronisation" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.exlibrisgroup.com/xsd/digitool/repository/synchronisation" elementFormDefault="unqualified">
+
+	<xs:element name="synchronisations">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="synchronisation"	type="synchronisation"	minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:complexType name="synchronisation">
+    	<xs:sequence>
+			<xs:element name="sources"		type="sources"		minOccurs="1" maxOccurs="1" />
+			<xs:element name="services"		type="services"		minOccurs="1" maxOccurs="1" />
+			<xs:element name="scheduling"	type="scheduling"	minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name"	type="xs:string"/>
+		<xs:attribute name="enable"	type="xs:boolean" default="true"/>
+	</xs:complexType>
+	
+	<xs:complexType name="sources" mixed="true">
+		<xs:sequence>
+			<xs:element name="source"	type="source"	minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="source">
+		<xs:sequence>
+   			<xs:element name="params"	type="params"	minOccurs="0" maxOccurs="1"/>
+   		</xs:sequence>
+		<xs:attribute name="name"	type="xs:string"/>
+		<xs:attribute name="class"	type="xs:string"/>
+	</xs:complexType>
+	
+	<xs:complexType name="services" mixed="true">
+		<xs:sequence>
+			<xs:element name="service"	type="service"	minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="service">
+		<xs:sequence>
+   			<xs:element name="params"	type="params"	minOccurs="0" maxOccurs="1"/>
+   		</xs:sequence>
+		<xs:attribute name="name"	type="xs:string"/>
+		<xs:attribute name="class"	type="xs:string"/>
+	</xs:complexType>
+	
+	<xs:complexType name="format_convertor" mixed="true">
+		<xs:sequence>
+   			<xs:element name="params"	type="params"	minOccurs="0" maxOccurs="1"/>
+   		</xs:sequence>
+		<xs:attribute name="type" 		type="format_convertor_type"/>
+		<xs:attribute name="convertor" 	type="xs:string"/>				
+	</xs:complexType>
+	
+	<xs:complexType name="params" mixed="true">
+		<xs:sequence>
+			<xs:element name="param"	type="param"	minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="param" mixed="true">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="name" 	type="xs:string"/>				
+			</xs:extension>
+		</xs:simpleContent>			
+	</xs:complexType>
+	
+	<xs:simpleType name="format_convertor_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="xsl"/>
+			<xs:enumeration value="class"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="scheduling" mixed="true">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="sync_on_startup" 	type="xs:boolean"/>
+				<xs:attribute name="type"				type="scheduling_type"/>
+				<xs:attribute name="x"					type="xs:string"/>
+				<xs:attribute name="y" 					type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>			
+	</xs:complexType>
+	
+	<xs:simpleType name="scheduling_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="every_x_minutes"/>
+			<xs:enumeration value="every_x_hours"/>
+			<xs:enumeration value="every_day_at_x_and_y"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

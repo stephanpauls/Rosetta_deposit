@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Guy (Exlibris) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:si="http://com/exlibris/core/infra/api/xmlbeans"
+	targetNamespace="http://com/exlibris/core/infra/api/xmlbeans"
+	elementFormDefault="unqualified">
+	<xs:element name="silo_schema">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="fields" type="si:fields" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="normalizing_profiles"
+					type="si:normalizing_profiles" minOccurs="1" maxOccurs="1" />
+				<xs:element name="metadata_indexes"
+					type="si:metadata_indexes" minOccurs="1" maxOccurs="1" />
+				<xs:element name="full_text_indexes"
+					type="si:full_text_indexes" minOccurs="0" maxOccurs="1" />
+				<xs:element name="manifestations_fields"
+					type="si:manifestations_fields" minOccurs="0" maxOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="fields">
+		<xs:sequence>
+			<xs:element name="field" type="si:field"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="field">
+		<xs:sequence>
+			<xs:element name="location" type="si:location" maxOccurs="unbounded" />
+			<xs:element name="field_path" type="xs:string" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="index_enabled" type="xs:boolean" default="true" />
+		<xs:attribute name="search_enabled" type="xs:boolean" default="true" />
+		<xs:attribute name="ui_code" type="xs:string" />
+		<xs:attribute name="ui_default_text" type="xs:string" />
+		<xs:attribute name="index_code" type="xs:string" />
+		<xs:attribute name="normalizing_profiles_ref" type="xs:string" />
+		<xs:attribute name="sort_normalizing_profiles_ref" type="xs:string" />
+		<xs:attribute name="search_type" type="xs:string" />
+		<xs:attribute name="lookup" type="xs:string" />
+		<xs:attribute name="valueColumn" type="xs:string"></xs:attribute>
+		<xs:attribute name="descriptionColumn" type="xs:string"></xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="location">
+		<xs:attribute name="type" type="si:location_type" />
+		<xs:attribute name="md_name" type="xs:string" />
+		<xs:attribute name="md_type" type="xs:string" />
+		<xs:attribute name="path" type="xs:string" />
+		<xs:attribute name="index_code" type="xs:string" />
+		<xs:attribute name="normalizing_profiles_ref" type="xs:string" />
+	</xs:complexType>
+
+	<xs:simpleType name="location_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="digital_entity" />
+			<xs:enumeration value="md" />
+			<xs:enumeration value="relations" />
+			<xs:enumeration value="thumbnail" />
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<xs:complexType name="metadata_indexes">
+		<xs:sequence>
+			<xs:element name="metadata_index" type="si:metadata_index"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="type" type="xs:string" />
+		<xs:attribute name="index_enabled" type="xs:boolean"
+			default="true" />
+	</xs:complexType>
+
+	<xs:complexType name="metadata_index">
+		<xs:sequence>
+			<xs:element name="field" type="si:field"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="type" type="xs:string" />
+		<xs:attribute name="index_enabled" type="xs:boolean" default="true" />
+		<xs:attribute name="is_relevant_to_ie" type="xs:boolean" default="false"></xs:attribute>
+		<xs:attribute name="is_relevant_to_rep" type="xs:boolean" default="false"></xs:attribute>
+		<xs:attribute name="is_relevant_to_file" type="xs:boolean" default="false"></xs:attribute>
+		<xs:attribute name="control_prefix" type="xs:string" />
+	</xs:complexType>
+
+	<xs:complexType name="normalizing_profiles">
+		<xs:sequence>
+			<xs:element name="normalizing_profile"
+				type="si:normalizing_profile" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="normalizing_profile">
+		<xs:sequence>
+			<xs:element name="normalizer" type="si:normalizer"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="normalizer">
+		<xs:attribute name="class_name" type="xs:string" />
+	</xs:complexType>
+
+
+	<xs:complexType name="manifestations_fields">
+		<xs:sequence>
+			<xs:element name="params" type="si:params" minOccurs="0"
+				maxOccurs="1" />
+		</xs:sequence>
+		<xs:attribute name="index_enabled" type="xs:boolean"
+			default="true" />
+	</xs:complexType>
+
+	<xs:complexType name="full_text_indexes">
+		<xs:sequence>
+			<xs:element name="params" type="si:params" minOccurs="0"
+				maxOccurs="1" />
+		</xs:sequence>
+		<xs:attribute name="index_enabled" type="xs:boolean"
+			default="true" />
+	</xs:complexType>
+
+
+	<xs:complexType name="params">
+		<xs:sequence>
+			<xs:element name="param" type="si:param" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="param" mixed="true">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="name" type="xs:string" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+</xs:schema>

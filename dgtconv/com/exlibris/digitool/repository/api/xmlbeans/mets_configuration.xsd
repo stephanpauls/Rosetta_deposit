@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Guy (Exlibris) -->
+<xs:schema targetNamespace="http://com/exlibris/digitool/repository/mets_configuration" xmlns:me="http://com/exlibris/digitool/repository/mets_configuration" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
+	
+	<xs:element name="mets_configuration">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="mets_viewer" type="me:mets_viewer" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="mets_transformer" type="me:mets_transformer" minOccurs="1" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="mets_viewer">
+		<xs:sequence>
+			<xs:element name="mets_exclude_usage" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="word_confidence_filter" type="xs:float" minOccurs="0" maxOccurs="1"/>
+    	</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="mets_transformer">
+		<xs:sequence>
+			<xs:element name="mets_usage_mapping" type="me:mets_usage_mapping" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="mets_md_mapping" type="me:mets_md_mapping" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="mets_compliant_entity_type" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    	</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="mets_usage_mapping">
+		<xs:attribute name="mets" type="xs:string"/>
+		<xs:attribute name="dige" type="xs:string"/>	
+		<xs:attribute name="dige_entity_type" type="xs:string"/>		
+	</xs:complexType>
+	
+	<xs:complexType name="mets_md_mapping">                
+		<xs:attribute name="mets" type="xs:string"/>
+		<xs:attribute name="dige_name" type="xs:string"/>		
+     	<xs:attribute name="dige_type" type="xs:string"/>		
+	</xs:complexType>
+	
+	
+</xs:schema>

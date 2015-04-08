@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://com/exlibris/core/web/page/xmlbeans"
+	xmlns:page="http://com/exlibris/core/web/page/xmlbeans"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:list="http://com/exlibris/core/web/listgenerator/xmlbeans"
+	xmlns:form="http://com/exlibris/digitool/common/forms/xmlbeans"
+	elementFormDefault="unqualified">
+
+	<xs:import
+		namespace="http://com/exlibris/core/web/listgenerator/xmlbeans"
+		schemaLocation="http://wikilibris/wiki/images/a/a0/X_list.xsd" />
+
+	<xs:import
+		namespace="http://com/exlibris/digitool/common/forms/xmlbeans"
+		schemaLocation="http://wikilibris/wiki/images/b/b1/X_form.xsd" />
+
+	<xs:element name="x_page">
+		<xs:annotation>
+			<xs:documentation>Create a new page</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="description" type="xs:string"
+					minOccurs="0" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>
+							Describe the content of the page.
+
+							Use only for source code documentation
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="bean_class_name" type="xs:string"
+					minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>
+							The full path and name of user bean class
+							that inherits ExlUIBean.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="action_class_name" type="xs:string"
+					minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>
+							The name and full path for user action class
+							that inherits ExlUIAction.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="scope" type="page:scope_type"
+					minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>
+							Determine the scope for the user page bean.
+							Valid values: session/request
+
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="x_sections" type="page:x_sections"
+					minOccurs="0" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>
+							Holds x_section elements.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="visible" type="form:visible"
+					minOccurs="0" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>
+							Determine whether the user can access the
+							page.
+
+							The validation is done by changing a boolean
+							value on the bean (field_name visible
+							attribute)
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="x_buttons" type="page:x_buttons"
+					minOccurs="0" maxOccurs="1" />
+				<xs:element name="label" type="xs:string" minOccurs="0"
+					maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>
+							Page's title i18n key. Enables a
+							full-flow-path breadcrumb. Notice that
+							codeTables_UI_lables.xml entry key has to
+							contain the prefix "title.", while this
+							specified key should not contain this
+							prefix.
+
+							For example: In ui_lables.xml - :codeValue
+							code="title.UserList" codeValue="User List"
+							/> and this key – label isUserList
+
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="include_js_file" type="xs:string"
+					minOccurs="0" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>
+							Include a JSP file in the HTML header
+							section. Please use it to include JSP that
+							contains only java scripts
+
+							The value should be a relative path to the
+							file for example /layouts/header/script.jsp
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:all>
+			<xs:attribute name="editRoles" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						List of User Roles, only user with the given
+						roles can enter this page in edit mode
+
+						in case a user is attempting to access the page
+						without the necessary roles the following
+						message will appear on the screen
+						c.error.unauthorizedUser
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="viewRoles" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						List of User Roles, only user with the given
+						roles can enter this page in view mode
+
+						in case a user is attempting to access the page
+						without the necessary roles the following
+						message will appear on the screen
+						c.error.unauthorizedUser
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="newRoles" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						List of User Roles, only user with the given
+						roles can enter this page in new mode
+
+						in case a user is attempting to access the page
+						without the necessary roles the following
+						message will appear on the screen
+						c.error.unauthorizedUser
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="x_sections">
+		<xs:sequence>
+			<xs:element name="x_section" minOccurs="1"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						Start new section
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="page:x_section" />
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="x_section">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="visible" type="form:visible" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determine if the given section is visible or not
+
+						field_name : the pageBean boolean property that
+						determines whether this section is visible or
+						not
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+			<xs:element name="validate_form" type="form:validate_form" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determine if the given section is validated or not
+
+						field_name : the pageBean boolean property that
+						determines whether validate the section or not
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+			<xs:element name="css_class" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The name of the section header .css class
+						Default: typeB
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="label" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Section name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="isCollapsible" type="xs:boolean"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determine if the section has ability to collapse
+						(true/false)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+			<xs:element name="iconName" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The name and path of the icon next to the
+						section header (this is in addition to the +/-
+						that will appear if is collapsible)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="headerDesc" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Description of the section header
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="header_field_name" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Description of the section header from a property on the bean
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+			<xs:element name="isOpen" type="xs:boolean" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determine if the section will be open on page
+						first load (true/false). If not collapsible then
+						this attribute is ignored.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="collapseClass" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The name of the section .css class
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="toolTip" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Add tool tip to the section collapsible icon
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_list" type="list:x_list" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>List Widget</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_form" type="form:x_form" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Form Widget</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_tabs" type="list:x_tabs" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Tabs Widget</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_import" type="page:x_import"
+				minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						Import Form/List XML Widget
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_include_jsp" type="page:x_include"
+				minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						Import JSP/HTML Widget
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name="roles" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>
+					User roles list, only user with the given roles can
+					see the current section
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="is_summary" type="xs:boolean"
+			default="false">
+			<xs:annotation>
+				<xs:documentation>
+					Relevant only if this is the first section that is
+					configured
+
+					in case the value is true 1. the page form will not
+					include this section. 2. in wizard tab mode the tabs
+					will appear after this section
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="is_quick_add" type="xs:boolean"
+			default="false">
+			<xs:annotation>
+				<xs:documentation>
+					Relevant only when using this section to add values
+					into list widget from a form widget.
+
+					In order to create a valid page with a form and list
+					you must set this attribute to true in the form
+					section.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="x_import">
+		<xs:all>
+			<xs:element name="position" type="xs:int" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the location of the imported widget
+						in the section. The order of the widget in the
+						section is descending according to the position
+						number.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+			<xs:element name="x_type" type="page:import_type"
+				minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Define the type for the type of widget that the
+						import XML is use for. Possible values: List,
+						Form
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_name" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The name of the import xml with relative path :
+						DB – four words key (com.exlibris.example.form)
+						On disk : relative to war/web-inf/class/
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="visible" type="form:visible" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determine if the given import widget is visible
+						or not
+
+						field_name : the pageBean boolean property that
+						determines whether this imported widget is
+						visible or not
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="field_name" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The field_name is a property field that defined
+						on the pageBean. The property must hold XML
+						string of the type that was configured in the
+						x_type element. The widget is then dynamically
+						created from the defined XML. Notice: for now
+						only dynamic Form are supported
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="selected_field" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Define the default selected field in the widget.
+						Notice: For now supported only for Tabs widget,
+						define the selected Tab. To configure the
+						selected Tab please set in this field the Tab
+						label.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="x_include">
+		<xs:all>
+			<xs:element name="position" type="xs:int" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the location of the include widget in
+						the section. The order of the widget in the
+						section is descending according to the position
+						number.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_name" type="xs:string" minOccurs="1"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Path to JSP location
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="operations" type="page:operations"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Unbounded labels' keys of submit operations
+						included in the JSP. Keeping those operations is
+						special map (key and value) will help recognize
+						their keys, when a submit operation will be
+						called. The programmer is responsible to add the
+						operation (i.e. value of submit button) to the
+						URL.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="operations">
+		<xs:sequence>
+			<xs:element name="operation" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						code table label key of submit operation
+						included in the JSP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="x_buttons">
+		<xs:sequence>
+			<xs:element name="x_button" minOccurs="1"
+				maxOccurs="unbounded" type="page:x_button">
+				<xs:annotation>
+					<xs:documentation>button widget</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="css_class" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The name of the .css class of the component
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="x_button">
+		<xs:all>
+			<xs:element name="url_template" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The url behind the tab operation [href]. Notice:
+						back buttons should be links as default.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ui_tool_tip" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>not implemented</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+			<xs:element name="button_position"
+				type="page:button_position" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The position of the button inside the page
+						buttons widget section, values can be –
+						Left,Right,Middle.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="positive_action" type="xs:boolean"
+				default="true" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Define the button as a positive vs. a negative
+						action. The color is determined by the css.
+						Values: true/false True is positive and false is
+						negative
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_combo_field" type="list:x_combo_field"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Execution list's definition block – if this
+						element is properly populated, an execution list
+						will be displayed
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_field_modes" type="form:x_field_modes"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the behavior of the UI component in
+						different field modes. Field possible modes:
+						Edit, View, New Field possible behavior:
+						Editable, Readonly, Hidden. The default behavior
+						of the field is: Edit = Editable; New =
+						Editable; View = Readonly
+
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="visible" type="form:visible" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determine if the given button is visible or not.
+						Visible-field_name : the pageBean Boolean
+						property that determines whether this button
+						widget is visible or not
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="css_class" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>not implemented</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+			<xs:element name="label" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The i18n label code for the button title
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="new_window" type="xs:boolean"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Relevant only for Href buttons. If set to true
+						pressing the button will open the Href target in
+						new window
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+		</xs:all>
+		<xs:attribute name="roles" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>
+					List of user roles, only user with the defined roles
+					can see the buttons
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:simpleType name="button_position">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Left" />
+			<xs:enumeration value="Right" />
+			<xs:enumeration value="Middle" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="import_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="List" />
+			<xs:enumeration value="Form" />
+			<xs:enumeration value="Tabs" />
+
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="scope_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="session" />
+			<xs:enumeration value="request" />
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

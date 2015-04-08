@@ -1,0 +1,892 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	targetNamespace="http://com/exlibris/core/web/listgenerator/xmlbeans"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:list="http://com/exlibris/core/web/listgenerator/xmlbeans"
+	xmlns:form="http://com/exlibris/digitool/common/forms/xmlbeans"
+	elementFormDefault="unqualified">
+
+	<xs:import
+		namespace="http://com/exlibris/digitool/common/forms/xmlbeans"
+		schemaLocation="http://wikilibris/wiki/images/b/b1/X_form.xsd" />
+
+
+	<!--
+		1.Element : x_list - base list structure
+		2.Element :list_name - name of the getter on the that will return list data collection.
+		3.Element : display_type - define the way the the list layout will be placed in the page.
+		4.Element : x_sections - inside declared all list layout structure order.
+		5.Element : x_sections - inside declared all list layout structure order.
+		6.Element : label - label of the section.
+		7.Element : label_populator_class_name - define the name of the populator that will be use to build the label in case of type different
+		than simple text.
+		8.Element : ui_tool_tip - not implemented
+		9.Element : x_general_parameters - will be use for configure special actions on  the section.
+		10.Element : x_filters - filter part on the list xml using this element will give ability to add filter on list.
+		11.Element : x_search - search part on the list xml using this element will give ability to add search on list.
+		12.Element : x_upper_actions - upper actions part on the list xml using this element will give ability to add upper actions on list.
+		13.Element : x_pagination - pagination part on the list xml using this element will give ability to add paginations filter on list.
+		14.Element : x_columns - columns part on the list xml using this element will give ability to define columns header and cells data on the list.
+		15.Element : x_row_actions - row actions part on the list xml using this element will give ability to add actions on list row
+		level(general actions and custom).
+		16.Element : x_lower_actions - lower action part on the list xml using this element will give ability to add data submit
+		actions for multi select on list rows.
+	-->
+	<xs:element name="x_list" type="list:x_list" />
+	<xs:complexType name="x_list">
+		<xs:all>
+			<xs:element name="position" type="xs:int" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the location of the list widget in
+						the section. The order of the widget in the
+						section
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="list_name" type="xs:string" minOccurs="1"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Name of ExlUIBean's List data member, which this
+						UI component represents.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="label_populator_class_name"
+				type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>not implemented</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ui_tool_tip" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>not implemented</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_general_parameters"
+				type="form:x_general_parameters" minOccurs="0" maxOccurs="1" />
+			<xs:element name="x_filters" type="list:x_filters"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Starts block for filters. Notice: there is a
+						limitation for maximum amount of 3 for list
+						filter combo box fields
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_search" type="list:x_search"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Starts block for search combo box on the list
+						search component (There is a limitation of 2
+						combo box configure on list search field).
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_upper_actions"
+				type="list:x_upper_actions" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Starts definition for list table upper actions
+						structure configuration
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_pagination" type="list:x_pagination"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Starts definition for list pagination component.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_tabs" type="list:x_tabs" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Starts definition for list table tabs structure
+						configuration
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_columns" type="list:x_columns"
+				minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Starts definition for list table columns
+						structure configuration
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_row_actions" type="list:x_row_actions"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Starts definition for list table row actions
+						structure configuration
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_lower_actions"
+				type="list:x_lower_actions" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Starts definition for list table lower actions
+						structure configuration
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="upper_css_class" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the .css class of the component that
+						contains upper actions and paging.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lower_css_class" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the .css class of the component that
+						contains lower actions.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="filtering_css_class" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the .css class of the component that
+						contains filters and the search.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="empty_list_message_key" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the key for the message presented in
+						case of empty list
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="visible" type="form:visible" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determine if the given list widget is visible or
+						not. Visible-field_name : the pageBean Boolean
+						property that determines whether this list
+						widget is visible or not
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="css_class" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the .css class of the list
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="label" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>not implemented</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="summary" type="xs:string" minOccurs="1"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Summary of list's content
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+		<xs:attribute name="roles" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>
+					User roles list, only user with the given roles can
+					see the current section
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<!--
+		1.Element : x_filters - filter part on the list xml using this element will give ability to add filter on list.
+		2.Element : x_combo_fields - adding this on the list xml on filter part will give ability to define data combo box building definitions.
+		3.Attribute : id - to be used on parsed xml result html the way to get the select tag of the combo box.
+	-->
+	<xs:complexType name="x_filters">
+		<xs:sequence>
+			<xs:element name="x_filter" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="x_combo_field"
+							type="list:x_combo_field" minOccurs="1" maxOccurs="3">
+							<xs:annotation>
+								<xs:documentation>
+									Starts definitions for filter field.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="css_class" type="xs:string"
+							minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									Determines the .css class of the
+									filters component
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="id" type="xs:string" />
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!--
+		1.Element : x_search - search part on the list xml using this element will give ability to add search on list.
+		2.Element : x_combo_fields - adding this on the list xml on search part will give ability to define data combo box building definitions.
+		3.Attribute : id - to be used on parsed xml result html the way to get the select tag of the combo box.
+	-->
+	<xs:complexType name="x_search">
+		<xs:sequence>
+			<xs:element name="x_combo_field" type="list:x_combo_field"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Starts definitions for filter field.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="css_class" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the .css class of the search
+						component
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" />
+	</xs:complexType>
+
+	<!--
+		1.Element : x_upper_actions - this will give ability to add actions on the table upper section.
+		2.Element : x_link_fields - define the action presentation and functionality data.
+		3.Attribute : id - to be used on parsed xml result html the way to get the action button object.
+	-->
+	<xs:complexType name="x_upper_actions">
+		<xs:sequence>
+			<xs:element name="x_link_fields" type="list:x_link_fields"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						See x_link_sections details above
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="css_class" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the .css class of the component
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" />
+	</xs:complexType>
+
+	<!--
+		1.Element : x_pagination - this will give ability to configure paging on list data
+		2.Element : pagination_limitation - default will be 3 give ability to configure number of pages shown on pagination link.
+		3.Element : label - will configure the message reporting number of current result and the total sum
+	-->
+	<xs:complexType name="x_pagination">
+		<xs:all>
+			<xs:element name="pagination_limitation" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The number of page to appear for quick view on
+						the paging bar.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="visible" type="form:visible" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determine if the paging is visible or not.
+						Visible-field_name : the pageBean Boolean
+						property that determines whether paging is
+						visible or not
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="css_class" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the .css class of the component
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="label" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines elements description on pageing bar.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+		<xs:attribute name="roles" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>
+					User roles list, only user with the given roles can
+					see the current section
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+
+	<!--
+		1.Element : x_tabs - will give ability to define specific general tabs list.
+		2.Element : x_tabs - define the single tab.
+		3.Element : url_template - define the single tab.
+		4.Element : label - define the single tab.
+		5.Element : break_line - if set to true then the current tab and the following tabs will be presented in the UI in new line
+	-->
+	<xs:complexType name="x_tabs">
+		<xs:sequence>
+			<xs:element name="position" type="xs:int" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the location of the list widget in
+						the section. The order of the widget in the
+						section
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="css_class" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_tab" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:all>
+						<xs:element name="url_template" type="xs:string"
+							minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									The url behind the tab operation
+									[href]
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="is_selected" type="xs:string"
+							minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									Determine if the tab will appear as
+									selectable true/false. Only one tab
+									per x_tabs widget can be selected.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="field_name" type="xs:string"
+							minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									The field's name on the extended
+									ExlUiBean that holds the tab label –
+									use this attribute when the title is
+									dynamically calculated. Relevant
+									getter on the bean is required
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="visible" type="form:visible"
+							minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									Determine if the given tab is
+									visible or not. A field_name located
+									on the page bean is configured. This
+									bean value must be Boolean.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="validate_form" type="form:validate_form" minOccurs="0"
+							maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									Determine if the given field is validated or not.
+									Validate-field_name : the pageBean Boolean
+									property that determines whether this field is
+									validate or not
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="css_class" type="xs:string"
+							minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									Use this attribute when multiplicity
+									of tabs is not well displayed:
+									css_class = wide.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="label" type="xs:string"
+							minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									The tab label code.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="break_line" type="xs:boolean"
+							minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									If true then the defined tab and the
+									next tabs will appear in the next
+									row. Possible values: true/false
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+
+					</xs:all>
+					<xs:attribute name="roles" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>
+								User roles list, only user with the
+								given roles can see the current section
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!--
+		1.Element : x_columns - this will give ability to configure column for the list data table(column header and column cell data and presentation).
+		2.Element : x_column - single column definitions.
+		3.Element : column_header - the column header definitions.
+		4.Element : x_field - column cell data configuration.
+	-->
+	<xs:complexType name="x_columns">
+		<xs:sequence>
+			<xs:element name="x_column" minOccurs="1"
+				maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:all>
+						<xs:element name="x_field" type="form:x_field"
+							minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									Starts definition for table column
+									cell meta data
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="column_header"
+							type="list:column_header" minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									Starts the configuration definition
+									for table column header
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:all>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!--
+		1.Element : x_row_actions - will give ability to define specific general actions on the row data.
+		2.Element : num_displayed - configure the number of action to show on the row before using gathering under "More"(default will be 3).
+		3.Element : x_link_fields - define the action presentation and functionality data.
+		4.Attribute : id - to be used on parsed xml result html the way to get the action href object.
+	-->
+	<xs:complexType name="x_row_actions">
+		<xs:all>
+			<xs:element name="num_displayed" type="xs:integer"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Number of action to show before using more icon.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_link_fields" type="list:x_link_fields"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						See x_link_sections details
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+		<xs:attribute name="id" type="xs:string" />
+	</xs:complexType>
+
+	<!--
+		1.Element : x_lower_actions - this will give ability to add actions on the table lower section.
+		2.Element : x_link_fields - define the action presentation and functionality data.(submit actions)
+		3.Attribute : id - to be used on parsed xml result html the way to get the action button object.
+	-->
+	<xs:complexType name="x_lower_actions">
+		<xs:all>
+			<xs:element name="x_link_fields"
+				type="list:x_link_fields">
+				<xs:annotation>
+					<xs:documentation>
+						See x_link_sections details
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="css_class" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the .css class of the component
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+		<xs:attribute name="id" type="xs:string" />
+	</xs:complexType>
+
+	<!--
+		1.Element : x_llink_fields - will be use for defining more than one linkable field.
+		2.Element : x_link_field - define single link field.
+	-->
+	<xs:complexType name="x_link_fields">
+		<xs:sequence>
+			<xs:element name="x_link_field" type="list:x_link_field"
+				minOccurs="1" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						Starts definition for x_link_field meta data
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!--
+		1.Element : x_link_field - start link field definitions part.
+		2.Element : field_name - name of the data collection item getter name
+		3.Element : url_template - defining the link url before it parameterized
+		4.Element : is_submit - defining if the field is submit or link action.
+		5.Element : x_ui_type - defining the presentation type for the field(Link button etc'....).
+		6.Attribute : id - to be used on parsed xml result html the way to get the action object.
+	-->
+	<xs:complexType name="x_link_field">
+		<xs:all>
+			<xs:element name="ui_tool_tip" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						i18n key for tooltip.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="confirmation_required_operation"
+				type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Notice: supported only in lower actions
+
+						Boolean attribute; in case of "true" a
+						confirmation page will appear before operation's
+						execution. You have to implement 2 methods: the
+						method handles this operation has to return URL
+						to execution method. An example of this method
+						can be found under Confirmation Mechanism
+						section.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_field_modes" type="form:x_field_modes"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the behavior of the UI component in
+						different field modes. Field possible modes:
+						Edit, View, New, External. Field possible
+						behavior: Editable, Readonly, Hidden. The
+						default behavior of the field is: Edit =
+						Editable; New = Editable; View = Readonly
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="visible" type="form:visible" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determine if the given link field is visible or
+						not. Visible-field_name : the pageBean Boolean
+						property that determines whether this link field
+						is visible or not
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="css_class" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the .css class of the component
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="label" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The code for the label on code tables.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="url_template" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Use to configure the actual action behind the UI
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="is_submit" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						defining if the field is submit or link action
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_general_parameters"
+				type="form:x_general_parameters" minOccurs="0" maxOccurs="1" />
+			<xs:element name="attached_field" type="form:x_field"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Notice: Not supported in upper/lower actions.
+						Attaches a field to the given link field. Use
+						primarily for attaching icons to list values.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+		<xs:attribute name="id" type="xs:string" />
+		<xs:attribute name="roles" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>
+					User roles list, only user with the given roles can
+					see the current section.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+
+	<!--
+		1.Element : x_combo_field - defining field as combo.
+		2.Element : populator_class_name - this will contain populator using table for generating combo box list of values.
+		3.Element : x_populator_parameters - defining the parameters for the populator class.
+		4.Attribute : id - to be used on parsed xml result html the way to get the select tag of the combo box.
+	-->
+	<xs:complexType name="x_combo_field">
+		<xs:all>
+			<xs:element name="populator_class_name" type="xs:string"
+				minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Define the name of the class that will be use by
+						list generator to populate values into the combo
+						box field (full path should be type).
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="x_populator_parameters"
+				type="form:x_populator_parameters" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Relevant parameters for populator, depends on
+						populator's definitions
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="visible" type="form:visible" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determine if the given filter is visible or not.
+						Visible-field_name : the pageBean Boolean
+						property that determines whether this filter is
+						visible or not
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="css_class" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the .css class of the component
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="label" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>not supported</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+		</xs:all>
+		<xs:attribute name="id" type="xs:string" />
+		<xs:attribute name="roles" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>
+					User roles list, only user with the given roles can
+					see the current section
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<!--
+		1.Element : column_header - adding header on table column.
+		2.Element : label - the column header.
+		3.Element : is_default_sort - define if the data table will be sort by the current table on first show.
+		4.Element : is_sort - define if the column has the ability to perform sort on the data table.
+		5.Element : sort_direction - define the direction to perform search in case the column is searchable.
+	-->
+	<xs:complexType name="column_header">
+		<xs:all>
+			<xs:element name="is_default_sort" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the column the list will be sort by
+						on first page load. Only one column can hold
+						true value for this attribute. Mandatory value
+						"true" for one column if at least one column
+						holds true value for "is_sort" attribute. If
+						this attribute's value is true, sort_direcation
+						and is_sort=true attributes are mandatory.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="is_sort" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determine if the column is sort able
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sort_direction"
+				type="list:sort_direction_type" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Define the order to sort by in case the column
+						field is default sort field.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="select_column" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Flag to mark column with select option such as :
+						radio, check box, image
+
+						possible values: true/false
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sort_field_name" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Populating this element with a fieldName
+						different from the column field's field name
+						means that the sorting will be done by
+						sort_field_name and the column displaying will
+						be done by column field's field name.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="visible" type="form:visible" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determine if the given column is visible or not.
+						Visible-field_name : the pageBean Boolean
+						property that determines whether this filter is
+						visible or not
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="css_class" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Determines the .css class of the column data. It
+						is highly recommended to match the class to the
+						content of the column (main use of this
+						attribute - "center" for images, check boxes and
+						radio buttons)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="label" type="xs:string" minOccurs="0"
+				maxOccurs="1" />
+		</xs:all>
+		<xs:attribute name="id" type="xs:string" />
+		<xs:attribute name="roles" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>
+					User roles list, only user with the given roles can
+					see the current section
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:simpleType name="sort_direction_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Asc" />
+			<xs:enumeration value="Desc" />
+			<xs:enumeration value="asc" />
+			<xs:enumeration value="desc" />
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

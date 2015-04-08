@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.openarchives.org/OAI/2.0/" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:oaip="http://www.openarchives.org/OAI/2.0/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<element name="oairoot">
+		<complexType>
+			<sequence>
+				<element name="set" type="oaip:set" minOccurs="0" maxOccurs="unbounded"/>
+				<element name="metadataFormat" type="oaip:metadata" minOccurs="0" maxOccurs="unbounded"/>
+				<element name="repositoryName" type="string"/>
+				<element name="baseURL" type="string"/>
+				<element name="adminEmail" type="string"/>
+				<element name="ListRecordLimit" type="short"/>
+				<element name="ListIdentifiersLimit" type="short"/>
+				<element name="description" type="oaip:DescriptionType"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="DescriptionType">
+		<sequence>
+			<any namespace="##other" processContents="strict"/>
+		</sequence>
+	</complexType>
+	<complexType name="set">
+		<sequence>
+			<element name="setSpec" type="string"/>
+			<element name="setName" type="string"/>
+			<element name="setDescription" type="oaip:DescriptionType" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="metadata">
+		<sequence>
+			<element name="metadataPrefix" type="string"/>
+			<element name="schema" type="string"/>
+			<element name="metadataNamespace" type="string"/>
+		</sequence>
+	</complexType>
+</schema>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mr="http://com/exlibris/digitool/common/formatting/xmlbeans" targetNamespace="http://com/exlibris/digitool/common/formatting/xmlbeans" elementFormDefault="unqualified">
+	<xs:element name="md_merge_rules">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="fields" type="mr:merge_fields" minOccurs="1" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="merge_fields">
+		<xs:sequence>
+			<xs:element name="field" type="mr:merge_field" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="merge_field">
+		<xs:sequence>
+			<xs:element name="location" type="mr:merge_location" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="action" type="mr:action"/>
+		<xs:attribute name="force" type="xs:boolean" default="false"/>
+	</xs:complexType>
+	
+	<xs:complexType name="merge_location">
+		<xs:attribute name="md_name" type="xs:string"/>
+		<xs:attribute name="md_type" type="xs:string"/>
+		<xs:attribute name="path" type="xs:string"/>
+	</xs:complexType>
+	
+	<xs:simpleType name="action">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="insert"/>
+			<xs:enumeration value="delete"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+</xs:schema>
